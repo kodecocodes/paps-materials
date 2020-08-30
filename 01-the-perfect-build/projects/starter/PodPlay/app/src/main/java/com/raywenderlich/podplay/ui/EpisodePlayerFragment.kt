@@ -338,7 +338,7 @@ class EpisodePlayerFragment : Fragment() {
     val controller = MediaControllerCompat.getMediaController(fragmentActivity)
     controller.sendCommand(CMD_CHANGESPEED, bundle, null)
 
-    speedButton.text = "${playerSpeed}x"
+    speedButton.text = resources.getText(R.string.player_speed, playerSpeed.toString())
   }
 
   private fun seekBy(seconds: Int) {
@@ -358,7 +358,7 @@ class EpisodePlayerFragment : Fragment() {
 
     val progress = position.toInt()
     seekBar.progress = progress
-    speedButton.text = "${playerSpeed}x"
+    speedButton.text = resources.getText(R.string.player_speed, playerSpeed.toString())
 
     if (isPlaying) {
       if (isVideo) {
@@ -381,7 +381,7 @@ class EpisodePlayerFragment : Fragment() {
         .load(podcastViewModel.activePodcastViewData?.imageUrl)
         .into(episodeImageView)
 
-    speedButton.text = "${playerSpeed}x"
+    speedButton.text = resources.getText(R.string.player_speed, playerSpeed.toString())
 
     mediaPlayer?.let {
       updateControlsFromController()

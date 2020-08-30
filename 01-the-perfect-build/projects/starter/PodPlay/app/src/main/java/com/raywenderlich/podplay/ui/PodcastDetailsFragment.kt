@@ -95,7 +95,7 @@ class PodcastDetailsFragment : Fragment(), EpisodeListAdapterListener {
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    when (item.itemId) {
+    return when (item.itemId) {
       R.id.menu_feed_action -> {
         podcastViewModel.activePodcastViewData?.feedUrl?.let {
 
@@ -105,10 +105,10 @@ class PodcastDetailsFragment : Fragment(), EpisodeListAdapterListener {
             listener?.onSubscribe()
           }
         }
-        return true
+        true
       }
       else ->
-        return super.onOptionsItemSelected(item)
+        super.onOptionsItemSelected(item)
     }
   }
 
@@ -117,16 +117,8 @@ class PodcastDetailsFragment : Fragment(), EpisodeListAdapterListener {
     if (context is OnPodcastDetailsListener) {
       listener = context
     } else {
-      throw RuntimeException(context.toString() + " must implement OnPodcastDetailsListener")
+      throw RuntimeException("$context must implement OnPodcastDetailsListener")
     }
-  }
-
-  override fun onStart() {
-    super.onStart()
-  }
-
-  override fun onStop() {
-    super.onStop()
   }
 
   private fun setupControls() {

@@ -45,8 +45,8 @@ import android.support.v4.media.session.PlaybackStateCompat
 
 class PodplayMediaCallback(
     val context: Context,
-    val mediaSession: MediaSessionCompat,
-    var mediaPlayer: MediaPlayer? = null
+    private val mediaSession: MediaSessionCompat,
+    private var mediaPlayer: MediaPlayer? = null
 ) : MediaSessionCompat.Callback() {
 
   var listener: PodplayMediaListener? = null
@@ -193,7 +193,7 @@ class PodplayMediaCallback(
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       if (newSpeed == null) {
-        speed = mediaPlayer?.getPlaybackParams()?.speed ?: 1.0f
+        speed = mediaPlayer?.playbackParams?.speed ?: 1.0f
       } else {
         speed = newSpeed
       }

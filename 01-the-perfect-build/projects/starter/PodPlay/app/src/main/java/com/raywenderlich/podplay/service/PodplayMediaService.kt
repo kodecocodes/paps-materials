@@ -84,7 +84,7 @@ class PodplayMediaService : MediaBrowserServiceCompat(), PodplayMediaListener {
   }
 
   override fun onLoadChildren(parentId: String, result: Result<MutableList<MediaBrowserCompat.MediaItem>>) {
-    if (parentId.equals(PODPLAY_EMPTY_ROOT_MEDIA_ID)) {
+    if (parentId == PODPLAY_EMPTY_ROOT_MEDIA_ID) {
       result.sendResult(null)
     }
   }
@@ -102,7 +102,7 @@ class PodplayMediaService : MediaBrowserServiceCompat(), PodplayMediaListener {
   private fun createMediaSession() {
 
     mediaSession = MediaSessionCompat(this, "PodplayMediaService")
-    setSessionToken(mediaSession.sessionToken)
+    sessionToken = mediaSession.sessionToken
 
     val callBack = PodplayMediaCallback(this, mediaSession)
     callBack.listener = this
