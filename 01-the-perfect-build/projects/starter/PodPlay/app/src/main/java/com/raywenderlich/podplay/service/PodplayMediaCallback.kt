@@ -192,11 +192,7 @@ class PodplayMediaCallback(
     var speed = 1.0f
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      if (newSpeed == null) {
-        speed = mediaPlayer?.playbackParams?.speed ?: 1.0f
-      } else {
-        speed = newSpeed
-      }
+      speed = newSpeed ?: (mediaPlayer?.playbackParams?.speed ?: 1.0f)
       mediaPlayer?.let { mediaPlayer ->
         try {
           mediaPlayer.playbackParams = mediaPlayer.playbackParams.setSpeed(speed)

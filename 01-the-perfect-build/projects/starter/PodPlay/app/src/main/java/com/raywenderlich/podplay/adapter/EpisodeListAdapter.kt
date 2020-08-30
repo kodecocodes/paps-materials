@@ -73,7 +73,7 @@ class EpisodeListAdapter(
   override fun onCreateViewHolder(
       parent: ViewGroup,
       viewType: Int
-  ): EpisodeListAdapter.ViewHolder {
+  ): ViewHolder {
     return ViewHolder(
         LayoutInflater.from(parent.context).inflate(
             R.layout.episode_item,

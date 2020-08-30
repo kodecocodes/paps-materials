@@ -41,7 +41,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.Constraints
@@ -225,7 +224,7 @@ class PodcastActivity :
   private fun setupPodcastListView() {
     podcastViewModel.getPodcasts()?.observe(
         this,
-        Observer {
+        {
           if (it != null) {
             showSubscribedPodcasts()
           }
@@ -305,7 +304,7 @@ class PodcastActivity :
   private fun showProgressBar() {
     progressBar.visibility = View.VISIBLE
   }
-  
+
   private fun hideProgressBar() {
     progressBar.visibility = View.INVISIBLE
   }

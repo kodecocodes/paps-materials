@@ -93,7 +93,7 @@ class PodplayMediaService : MediaBrowserServiceCompat(), PodplayMediaListener {
       clientUid: Int,
       rootHints: Bundle?
   ): BrowserRoot? {
-    return MediaBrowserServiceCompat.BrowserRoot(
+    return BrowserRoot(
         PODPLAY_EMPTY_ROOT_MEDIA_ID,
         null
     )
@@ -225,7 +225,7 @@ class PodplayMediaService : MediaBrowserServiceCompat(), PodplayMediaListener {
           this@PodplayMediaService,
           Intent(this@PodplayMediaService, PodplayMediaService::class.java)
       )
-      startForeground(PodplayMediaService.NOTIFICATION_ID, notification)
+      startForeground(NOTIFICATION_ID, notification)
     }
   }
 
