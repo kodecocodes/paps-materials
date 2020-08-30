@@ -73,8 +73,11 @@ class PodcastDetailsFragment : Fragment(), EpisodeListAdapterListener {
     setHasOptionsMenu(true)
   }
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                            savedInstanceState: Bundle?): View? {
+  override fun onCreateView(
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
+  ): View? {
     return inflater.inflate(R.layout.fragment_podcast_details, container, false)
   }
 
@@ -136,7 +139,9 @@ class PodcastDetailsFragment : Fragment(), EpisodeListAdapterListener {
     episodeRecyclerView.layoutManager = layoutManager
 
     val dividerItemDecoration = DividerItemDecoration(
-            episodeRecyclerView.context, layoutManager.orientation)
+        episodeRecyclerView.context,
+        layoutManager.orientation
+    )
     episodeRecyclerView.addItemDecoration(dividerItemDecoration)
 
     episodeListAdapter = EpisodeListAdapter(podcastViewModel.activePodcastViewData?.episodes, this)

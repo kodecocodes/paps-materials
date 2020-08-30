@@ -39,7 +39,7 @@ import com.raywenderlich.podplay.model.Podcast
 import com.raywenderlich.podplay.repository.PodcastRepo
 import com.raywenderlich.podplay.util.DateUtils
 import com.raywenderlich.podplay.viewmodel.SearchViewModel.PodcastSummaryViewData
-import java.util.*
+import java.util.Date
 
 class PodcastViewModel(application: Application) : AndroidViewModel
 (application) {
@@ -64,9 +64,10 @@ class PodcastViewModel(application: Application) : AndroidViewModel
     }
   }
 
-  fun getPodcast(podcastSummaryViewData: PodcastSummaryViewData, callback: (PodcastViewData?) ->
-  Unit) {
-
+  fun getPodcast(
+      podcastSummaryViewData: PodcastSummaryViewData,
+      callback: (PodcastViewData?) -> Unit
+  ) {
     val repo = podcastRepo ?: return
     val feedUrl = podcastSummaryViewData.feedUrl ?: return
 
@@ -118,7 +119,8 @@ class PodcastViewModel(application: Application) : AndroidViewModel
         podcast.feedTitle,
         DateUtils.dateToShortDate(podcast.lastUpdated),
         podcast.imageUrl,
-        podcast.feedUrl)
+        podcast.feedUrl
+    )
   }
 
   private fun podcastToPodcastView(podcast: Podcast): PodcastViewData {
@@ -135,8 +137,15 @@ class PodcastViewModel(application: Application) : AndroidViewModel
   private fun episodesToEpisodesView(episodes: List<Episode>): List<EpisodeViewData> {
     return episodes.map {
       val isVideo = it.mimeType.startsWith("video")
-      EpisodeViewData(it.guid, it.title, it.description, it.mediaUrl,
-          it.releaseDate, it.duration, isVideo)
+      EpisodeViewData(
+          it.guid,
+          it.title,
+          it.description,
+          it.mediaUrl,
+          it.releaseDate,
+          it.duration,
+          isVideo
+      )
     }
   }
 
@@ -149,7 +158,7 @@ class PodcastViewModel(application: Application) : AndroidViewModel
       var episodes: List<EpisodeViewData>
   )
 
-  data class EpisodeViewData (
+  data class EpisodeViewData(
       var guid: String? = "",
       var title: String? = "",
       var description: String? = "",

@@ -111,7 +111,7 @@ class PodcastActivity :
     searchMenuItem = menu.findItem(R.id.search_item)
     val searchView = searchMenuItem.actionView as SearchView
 
-    searchMenuItem.setOnActionExpandListener(object: MenuItem.OnActionExpandListener {
+    searchMenuItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
       override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
         return true
       }
@@ -274,7 +274,8 @@ class PodcastActivity :
     supportFragmentManager.beginTransaction().replace(
         R.id.podcastDetailsContainer,
         episodePlayerFragment,
-        TAG_PLAYER_FRAGMENT).addToBackStack("PlayerFragment").commit()
+        TAG_PLAYER_FRAGMENT
+    ).addToBackStack("PlayerFragment").commit()
     podcastRecyclerView.visibility = View.INVISIBLE
     searchMenuItem.isVisible = false
   }

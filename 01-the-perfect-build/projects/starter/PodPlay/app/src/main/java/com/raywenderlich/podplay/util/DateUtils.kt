@@ -32,7 +32,8 @@ package com.raywenderlich.podplay.util
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 object DateUtils {
   fun jsonDateToShortDate(jsonDate: String?): String {
@@ -56,5 +57,4 @@ object DateUtils {
     val inFormat = SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.getDefault())
     return inFormat.parse(date) ?: Date()
   }
-
 }
