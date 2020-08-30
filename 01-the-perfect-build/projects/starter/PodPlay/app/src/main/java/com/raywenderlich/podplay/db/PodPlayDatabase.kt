@@ -31,10 +31,14 @@
 package com.raywenderlich.podplay.db
 
 import android.content.Context
-import androidx.room.*
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
 import com.raywenderlich.podplay.model.Episode
 import com.raywenderlich.podplay.model.Podcast
-import java.util.*
+import java.util.Date
 
 class Converters {
   @TypeConverter
@@ -60,8 +64,11 @@ abstract class PodPlayDatabase : RoomDatabase() {
 
     fun getInstance(context: Context): PodPlayDatabase {
       if (instance == null) {
-        instance = Room.databaseBuilder(context.applicationContext,
-            PodPlayDatabase::class.java, "PodPlayer").build()
+        instance = Room.databaseBuilder(
+            context.applicationContext,
+            PodPlayDatabase::class.java,
+            "PodPlayer"
+        ).build()
       }
       return instance as PodPlayDatabase
     }

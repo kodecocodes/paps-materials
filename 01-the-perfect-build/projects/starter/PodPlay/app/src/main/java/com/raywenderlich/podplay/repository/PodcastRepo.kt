@@ -41,8 +41,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class PodcastRepo(private var feedService: FeedService,
-                  private var podcastDao: PodcastDao) {
+class PodcastRepo(
+    private var feedService: FeedService,
+    private var podcastDao: PodcastDao
+) {
 
   fun getPodcast(feedUrl: String, callback: (Podcast?) -> Unit) {
 
@@ -69,11 +71,9 @@ class PodcastRepo(private var feedService: FeedService,
         }
       }
     }
-
   }
 
-  fun getAll(): LiveData<List<Podcast>>
-  {
+  fun getAll(): LiveData<List<Podcast>> {
     return podcastDao.loadPodcasts()
   }
 
@@ -147,14 +147,29 @@ class PodcastRepo(private var feedService: FeedService,
     }
   }
 
-  private fun rssResponseToPodcast(feedUrl: String, imageUrl: String, rssResponse:
-  RssFeedResponse): Podcast? {
+  private fun rssResponseToPodcast(
+      feedUrl: String,
+      imageUrl: String,
+      rssResponse: RssFeedResponse
+  ): Podcast? {
 
     val items = rssResponse.episodes ?: return null
-    val description = if (rssResponse.description == "") rssResponse.summary else rssResponse.description
+    val description =
+        if (rssResponse.description == "") {
+          rssResponse.summary
+        } else {
+          rssResponse.description
+        }
 
-    return Podcast(null, feedUrl, rssResponse.title, description, imageUrl,
-        rssResponse.lastUpdated, episodes = rssItemsToEpisodes(items))
+    return Podcast(
+        null,
+        feedUrl,
+        rssResponse.title,
+        description,
+        imageUrl,
+        rssResponse.lastUpdated,
+        episodes = rssItemsToEpisodes(items)
+    )
   }
 
   private fun rssItemsToEpisodes(episodeResponses: List<RssFeedResponse.EpisodeResponse>): List<Episode> {
@@ -172,5 +187,5 @@ class PodcastRepo(private var feedService: FeedService,
     }
   }
 
-  class PodcastUpdateInfo (val feedUrl: String, val name: String, val newCount: Int)
+  class PodcastUpdateInfo(val feedUrl: String, val name: String, val newCount: Int)
 }

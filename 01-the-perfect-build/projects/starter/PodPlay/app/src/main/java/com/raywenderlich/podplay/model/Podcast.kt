@@ -33,7 +33,7 @@ package com.raywenderlich.podplay.model
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import java.util.*
+import java.util.Date
 
 @Entity
 data class Podcast(

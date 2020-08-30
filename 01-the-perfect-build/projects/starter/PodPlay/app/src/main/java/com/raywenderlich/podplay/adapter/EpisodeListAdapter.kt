@@ -43,16 +43,17 @@ import kotlinx.android.synthetic.main.episode_item.view.*
 
 class EpisodeListAdapter(
     private var episodeViewList: List<EpisodeViewData>?,
-    private val episodeListAdapterListener: EpisodeListAdapterListener) :
-    RecyclerView.Adapter<EpisodeListAdapter.ViewHolder>() {
+    private val episodeListAdapterListener: EpisodeListAdapterListener
+) : RecyclerView.Adapter<EpisodeListAdapter.ViewHolder>() {
 
   interface EpisodeListAdapterListener {
     fun onSelectedEpisode(episodeViewData: EpisodeViewData)
   }
 
   class ViewHolder(
-      v: View, private val episodeListAdapterListener: EpisodeListAdapterListener) :
-      RecyclerView.ViewHolder(v) {
+      v: View,
+      private val episodeListAdapterListener: EpisodeListAdapterListener
+  ) : RecyclerView.ViewHolder(v) {
 
     init {
       v.setOnClickListener {
@@ -69,10 +70,18 @@ class EpisodeListAdapter(
     val releaseDateTextView: TextView = v.releaseDateView
   }
 
-  override fun onCreateViewHolder(parent: ViewGroup,
-                                  viewType: Int): EpisodeListAdapter.ViewHolder {
-    return ViewHolder(LayoutInflater.from(parent.context)
-        .inflate(R.layout.episode_item, parent, false), episodeListAdapterListener)
+  override fun onCreateViewHolder(
+      parent: ViewGroup,
+      viewType: Int
+  ): EpisodeListAdapter.ViewHolder {
+    return ViewHolder(
+        LayoutInflater.from(parent.context).inflate(
+            R.layout.episode_item,
+            parent,
+            false
+        ),
+        episodeListAdapterListener
+    )
   }
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -81,7 +90,7 @@ class EpisodeListAdapter(
 
     holder.episodeViewData = episodeView
     holder.titleTextView.text = episodeView.title
-    holder.descTextView.text =  HtmlUtils.htmlToSpannable(episodeView.description ?: "")
+    holder.descTextView.text = HtmlUtils.htmlToSpannable(episodeView.description ?: "")
     holder.durationTextView.text = episodeView.duration
     holder.releaseDateTextView.text = episodeView.releaseDate?.let { DateUtils.dateToShortDate(it) }
   }

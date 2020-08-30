@@ -58,7 +58,7 @@ class EpisodeUpdateWorker(context: Context, params: WorkerParameters) : Coroutin
       val db = PodPlayDatabase.getInstance(applicationContext)
       val repo = PodcastRepo(FeedService.instance, db.podcastDao())
 
-      repo.updatePodcastEpisodes{ podcastUpdates ->
+      repo.updatePodcastEpisodes { podcastUpdates ->
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
           createNotificationChannel()
@@ -85,7 +85,6 @@ class EpisodeUpdateWorker(context: Context, params: WorkerParameters) : Coroutin
   }
   
   private fun displayNotification(podcastInfo: PodcastRepo.PodcastUpdateInfo) {
-
     val contentIntent = Intent(applicationContext, PodcastActivity::class.java)
     contentIntent.putExtra(EXTRA_FEED_URL, podcastInfo.feedUrl)
     val pendingContentIntent = PendingIntent.getActivity(applicationContext, 0, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT)
@@ -99,7 +98,6 @@ class EpisodeUpdateWorker(context: Context, params: WorkerParameters) : Coroutin
         .setContentIntent(pendingContentIntent)
         .build()
 
-    
     val notificationManager = applicationContext.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
     notificationManager.notify(podcastInfo.name, 0, notification)
   }

@@ -31,12 +31,16 @@
 package com.raywenderlich.podplay.service
 
 import com.raywenderlich.podplay.util.DateUtils
-import okhttp3.*
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import org.w3c.dom.Node
 import java.io.IOException
 import javax.xml.parsers.DocumentBuilderFactory
 
-class RssFeedService: FeedService  {
+class RssFeedService : FeedService {
   override fun getFeed(xmlFileURL: String, callBack: (RssFeedResponse?) -> Unit) {
 
     val client = OkHttpClient()

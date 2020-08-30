@@ -34,7 +34,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import java.util.*
+import java.util.Date
 
 @Entity(
     foreignKeys = [
@@ -42,11 +42,13 @@ import java.util.*
           entity = Podcast::class,
           parentColumns = ["id"],
           childColumns = ["podcastId"],
-          onDelete = ForeignKey.CASCADE)
+          onDelete = ForeignKey.CASCADE
+      )
     ],
     indices = [Index("podcastId")]
 )
-data class Episode (
+
+data class Episode(
     @PrimaryKey var guid: String = "",
     var podcastId: Long? = null,
     var title: String = "",
@@ -56,4 +58,3 @@ data class Episode (
     var releaseDate: Date = Date(),
     var duration: String = ""
 )
-

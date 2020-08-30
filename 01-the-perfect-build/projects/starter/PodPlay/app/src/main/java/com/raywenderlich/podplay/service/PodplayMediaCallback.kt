@@ -43,10 +43,11 @@ import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 
-class PodplayMediaCallback(val context: Context,
-                           val mediaSession: MediaSessionCompat,
-                           var mediaPlayer: MediaPlayer? = null) :
-    MediaSessionCompat.Callback() {
+class PodplayMediaCallback(
+    val context: Context,
+    val mediaSession: MediaSessionCompat,
+    var mediaPlayer: MediaPlayer? = null
+) : MediaSessionCompat.Callback() {
 
   var listener: PodplayMediaListener? = null
 
@@ -56,8 +57,11 @@ class PodplayMediaCallback(val context: Context,
   private var focusRequest: AudioFocusRequest? = null
   private var mediaNeedsPrepare: Boolean = false
 
-  override fun onCommand(command: String?, extras: Bundle?,
-                         cb: ResultReceiver?) {
+  override fun onCommand(
+      command: String?,
+      extras: Bundle?,
+      cb: ResultReceiver?
+  ) {
     super.onCommand(command, extras, cb)
     when (command) {
       CMD_CHANGESPEED -> extras?.let { changeSpeed(it) }
@@ -119,31 +123,37 @@ class PodplayMediaCallback(val context: Context,
 
   private fun ensureAudioFocus(): Boolean {
     val audioManager = this.context.getSystemService(
-        Context.AUDIO_SERVICE) as AudioManager
+        Context.AUDIO_SERVICE
+    ) as AudioManager
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       val focusRequest = AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN).run {
-        setAudioAttributes(AudioAttributes.Builder().run {
-          setUsage(AudioAttributes.USAGE_MEDIA)
-          setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-          build()
-        })
+        setAudioAttributes(
+            AudioAttributes.Builder().run {
+              setUsage(AudioAttributes.USAGE_MEDIA)
+              setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+              build()
+            }
+        )
         build()
       }
       this.focusRequest = focusRequest
       val result = audioManager.requestAudioFocus(focusRequest)
       return result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED
     } else {
-      val result = audioManager.requestAudioFocus(null,
+      val result = audioManager.requestAudioFocus(
+          null,
           AudioManager.STREAM_MUSIC,
-          AudioManager.AUDIOFOCUS_GAIN)
+          AudioManager.AUDIOFOCUS_GAIN
+      )
       return result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED
     }
   }
 
   private fun removeAudioFocus() {
     val audioManager = this.context.getSystemService(
-        Context.AUDIO_SERVICE) as AudioManager
+        Context.AUDIO_SERVICE
+    ) as AudioManager
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       focusRequest?.let {
@@ -157,7 +167,7 @@ class PodplayMediaCallback(val context: Context,
   private fun initializeMediaPlayer() {
     if (mediaPlayer == null) {
       mediaPlayer = MediaPlayer()
-      mediaPlayer!!.setOnCompletionListener{
+      mediaPlayer!!.setOnCompletionListener {
         setState(PlaybackStateCompat.STATE_PAUSED)
       }
       mediaNeedsPrepare = true
@@ -190,8 +200,7 @@ class PodplayMediaCallback(val context: Context,
       mediaPlayer?.let { mediaPlayer ->
         try {
           mediaPlayer.playbackParams = mediaPlayer.playbackParams.setSpeed(speed)
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
 
           mediaPlayer.reset()
           mediaUri?.let { mediaUri ->
@@ -214,14 +223,17 @@ class PodplayMediaCallback(val context: Context,
             PlaybackStateCompat.ACTION_PLAY or
                 PlaybackStateCompat.ACTION_STOP or
                 PlaybackStateCompat.ACTION_PLAY_PAUSE or
-                PlaybackStateCompat.ACTION_PAUSE)
+                PlaybackStateCompat.ACTION_PAUSE
+        )
         .setState(state, position, speed)
         .build()
 
     mediaSession.setPlaybackState(playbackState)
 
-    if (state == PlaybackStateCompat.STATE_PAUSED ||
-        state == PlaybackStateCompat.STATE_PLAYING) {
+    if (
+        state == PlaybackStateCompat.STATE_PAUSED ||
+        state == PlaybackStateCompat.STATE_PLAYING
+    ) {
       listener?.onStateChanged()
     }
   }
@@ -237,17 +249,25 @@ class PodplayMediaCallback(val context: Context,
             mediaPlayer.prepare()
           }
           mediaExtras?.let { mediaExtras ->
-            mediaSession.setMetadata(MediaMetadataCompat.Builder()
-                .putString(MediaMetadataCompat.METADATA_KEY_TITLE,
-                    mediaExtras.getString(MediaMetadataCompat.METADATA_KEY_TITLE))
-                .putString(MediaMetadataCompat.METADATA_KEY_ARTIST,
-                    mediaExtras.getString(MediaMetadataCompat.METADATA_KEY_ARTIST))
-                .putString(MediaMetadataCompat.METADATA_KEY_ALBUM_ART_URI,
-                    mediaExtras.getString(
-                        MediaMetadataCompat.METADATA_KEY_ALBUM_ART_URI))
-                .putLong(MediaMetadataCompat.METADATA_KEY_DURATION,
-                    mediaPlayer.duration.toLong())
-                .build())
+            mediaSession.setMetadata(
+                MediaMetadataCompat.Builder().putString(
+                    MediaMetadataCompat.METADATA_KEY_TITLE,
+                    mediaExtras.getString(MediaMetadataCompat.METADATA_KEY_TITLE)
+                )
+                .putString(
+                    MediaMetadataCompat.METADATA_KEY_ARTIST,
+                    mediaExtras.getString(MediaMetadataCompat.METADATA_KEY_ARTIST)
+                )
+                .putString(
+                    MediaMetadataCompat.METADATA_KEY_ALBUM_ART_URI,
+                    mediaExtras.getString(MediaMetadataCompat.METADATA_KEY_ALBUM_ART_URI)
+                )
+                .putLong(
+                    MediaMetadataCompat.METADATA_KEY_DURATION,
+                    mediaPlayer.duration.toLong()
+                )
+                .build()
+            )
           }
         }
       }

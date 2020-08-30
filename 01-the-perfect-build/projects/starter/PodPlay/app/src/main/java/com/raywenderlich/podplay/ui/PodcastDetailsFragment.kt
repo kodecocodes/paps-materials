@@ -30,19 +30,16 @@
 
 package com.raywenderlich.podplay.ui
 
-import android.content.ComponentName
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
-import android.support.v4.media.MediaBrowserCompat
-import android.support.v4.media.MediaMetadataCompat
-import android.support.v4.media.session.MediaControllerCompat
-import android.support.v4.media.session.MediaSessionCompat
-import android.support.v4.media.session.PlaybackStateCompat
 import android.text.method.ScrollingMovementMethod
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,11 +47,9 @@ import com.bumptech.glide.Glide
 import com.raywenderlich.podplay.R
 import com.raywenderlich.podplay.adapter.EpisodeListAdapter
 import com.raywenderlich.podplay.adapter.EpisodeListAdapter.EpisodeListAdapterListener
-import com.raywenderlich.podplay.service.PodplayMediaService
 import com.raywenderlich.podplay.viewmodel.PodcastViewModel
 import com.raywenderlich.podplay.viewmodel.PodcastViewModel.EpisodeViewData
 import kotlinx.android.synthetic.main.fragment_podcast_details.*
-
 
 class PodcastDetailsFragment : Fragment(), EpisodeListAdapterListener {
 

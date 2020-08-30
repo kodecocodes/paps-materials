@@ -34,34 +34,42 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.appcompat.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.work.*
-import com.raywenderlich.podplay.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.Constraints
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.NetworkType
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.raywenderlich.podplay.adapter.PodcastListAdapter
 import com.raywenderlich.podplay.adapter.PodcastListAdapter.PodcastListAdapterListener
 import com.raywenderlich.podplay.db.PodPlayDatabase
+import com.raywenderlich.podplay.R
 import com.raywenderlich.podplay.repository.ItunesRepo
 import com.raywenderlich.podplay.repository.PodcastRepo
-import com.raywenderlich.podplay.worker.EpisodeUpdateWorker
 import com.raywenderlich.podplay.service.FeedService
 import com.raywenderlich.podplay.service.ItunesService
 import com.raywenderlich.podplay.ui.PodcastDetailsFragment.OnPodcastDetailsListener
 import com.raywenderlich.podplay.viewmodel.PodcastViewModel
 import com.raywenderlich.podplay.viewmodel.PodcastViewModel.EpisodeViewData
 import com.raywenderlich.podplay.viewmodel.SearchViewModel
-import kotlinx.android.synthetic.main.activity_podcast.*
+import com.raywenderlich.podplay.worker.EpisodeUpdateWorker
 import java.util.concurrent.TimeUnit
+import kotlinx.android.synthetic.main.activity_podcast.podcastRecyclerView
+import kotlinx.android.synthetic.main.activity_podcast.progressBar
+import kotlinx.android.synthetic.main.activity_podcast.toolbar
 
-class PodcastActivity : AppCompatActivity(), PodcastListAdapterListener,
+class PodcastActivity :
+    AppCompatActivity(),
+    PodcastListAdapterListener,
     OnPodcastDetailsListener {
 
   private val searchViewModel by viewModels<SearchViewModel>()
@@ -150,7 +158,7 @@ class PodcastActivity : AppCompatActivity(), PodcastListAdapterListener,
       }
     }
   }
-  
+
   private fun scheduleJobs() {
 
     val constraints: Constraints = Constraints.Builder().apply {
@@ -159,16 +167,18 @@ class PodcastActivity : AppCompatActivity(), PodcastListAdapterListener,
     }.build()
 
     val request = PeriodicWorkRequestBuilder<EpisodeUpdateWorker>(
-            1, TimeUnit.HOURS)
-            .setConstraints(constraints)
-            .build()
+        1,
+        TimeUnit.HOURS
+    ).setConstraints(constraints).build()
 
-    WorkManager.getInstance(this).enqueueUniquePeriodicWork(TAG_EPISODE_UPDATE_JOB,
-            ExistingPeriodicWorkPolicy.REPLACE, request)
+    WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+        TAG_EPISODE_UPDATE_JOB,
+        ExistingPeriodicWorkPolicy.REPLACE,
+        request
+    )
   }
 
-  private fun showSubscribedPodcasts()
-  {
+  private fun showSubscribedPodcasts() {
     val podcasts = podcastViewModel.getPodcasts()?.value
 
     if (podcasts != null) {
@@ -185,7 +195,7 @@ class PodcastActivity : AppCompatActivity(), PodcastListAdapterListener,
       podcastListAdapter.setSearchData(results)
     }
   }
-  
+
   private fun handleIntent(intent: Intent) {
     if (Intent.ACTION_SEARCH == intent.action) {
       val query = intent.getStringExtra(SearchManager.QUERY) ?: return
@@ -198,7 +208,6 @@ class PodcastActivity : AppCompatActivity(), PodcastListAdapterListener,
       }
     }
   }
-  
 
   private fun setupToolbar() {
     setSupportActionBar(toolbar)
@@ -214,15 +223,17 @@ class PodcastActivity : AppCompatActivity(), PodcastListAdapterListener,
   }
 
   private fun setupPodcastListView() {
-    podcastViewModel.getPodcasts()?.observe(this, Observer {
-      if (it != null) {
-        showSubscribedPodcasts()
-      }
-    })
+    podcastViewModel.getPodcasts()?.observe(
+        this,
+        Observer {
+          if (it != null) {
+            showSubscribedPodcasts()
+          }
+        }
+    )
   }
 
-  private fun addBackStackListener()
-  {
+  private fun addBackStackListener() {
     supportFragmentManager.addOnBackStackChangedListener {
       if (supportFragmentManager.backStackEntryCount == 0) {
         podcastRecyclerView.visibility = View.VISIBLE
@@ -237,19 +248,22 @@ class PodcastActivity : AppCompatActivity(), PodcastListAdapterListener,
     podcastRecyclerView.layoutManager = layoutManager
 
     val dividerItemDecoration = DividerItemDecoration(
-            podcastRecyclerView.context, layoutManager.orientation)
+        podcastRecyclerView.context,
+        layoutManager.orientation
+    )
     podcastRecyclerView.addItemDecoration(dividerItemDecoration)
 
     podcastListAdapter = PodcastListAdapter(null, this, this)
     podcastRecyclerView.adapter = podcastListAdapter
   }
 
-
   private fun showDetailsFragment() {
     val podcastDetailsFragment = createPodcastDetailsFragment()
 
-    supportFragmentManager.beginTransaction().add(R.id.podcastDetailsContainer,
-        podcastDetailsFragment, TAG_DETAILS_FRAGMENT).addToBackStack("DetailsFragment").commit()
+    supportFragmentManager.beginTransaction().add(
+        R.id.podcastDetailsContainer,
+        podcastDetailsFragment, TAG_DETAILS_FRAGMENT
+    ).addToBackStack("DetailsFragment").commit()
     podcastRecyclerView.visibility = View.INVISIBLE
     searchMenuItem.isVisible = false
   }
@@ -257,8 +271,10 @@ class PodcastActivity : AppCompatActivity(), PodcastListAdapterListener,
   private fun showPlayerFragment() {
     val episodePlayerFragment = createEpisodePlayerFragment()
 
-    supportFragmentManager.beginTransaction().replace(R.id.podcastDetailsContainer,
-        episodePlayerFragment, TAG_PLAYER_FRAGMENT).addToBackStack("PlayerFragment").commit()
+    supportFragmentManager.beginTransaction().replace(
+        R.id.podcastDetailsContainer,
+        episodePlayerFragment,
+        TAG_PLAYER_FRAGMENT).addToBackStack("PlayerFragment").commit()
     podcastRecyclerView.visibility = View.INVISIBLE
     searchMenuItem.isVisible = false
   }
