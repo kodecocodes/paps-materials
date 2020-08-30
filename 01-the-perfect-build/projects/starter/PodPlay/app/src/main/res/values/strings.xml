@@ -14,4 +14,6 @@
   <string name="replay_10_content_description">replay 10</string>
   <string name="forward_30_content_description">forward 30</string>
   <string name="podcast_image_view_content_description">podcast image view</string>
+  <string name="text_1x">1x</string>
+  <string name="text_0_00">0:00</string>
 </resources>
