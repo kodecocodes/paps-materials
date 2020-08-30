@@ -34,7 +34,8 @@
       android:layout_marginTop="8dp"
       android:src="@android:drawable/ic_menu_report_image"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"/>
+      app:layout_constraintTop_toTopOf="parent"
+      android:contentDescription="@string/image_placeholder_content_description" />
 
     <TextView
         android:id="@+id/episodeTitleTextView"
@@ -82,7 +83,8 @@
         android:scaleType="fitCenter"
         android:src="@drawable/ic_replay_10_white"
         app:layout_constraintEnd_toStartOf="@+id/playToggleButton"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+      android:contentDescription="@string/replay_10_content_description" />
 
     <Button
         android:id="@+id/playToggleButton"
@@ -106,7 +108,8 @@
         android:scaleType="fitCenter"
         android:src="@drawable/ic_forward_30_white"
         app:layout_constraintStart_toEndOf="@+id/playToggleButton"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+      android:contentDescription="@string/forward_30_content_description" />
 
     <Button
         android:id="@+id/speedButton"

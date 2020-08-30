@@ -15,14 +15,15 @@
       app:layout_constraintTop_toTopOf="parent">
 
     <ImageView
-        android:id="@+id/feedImageView"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:src="@android:drawable/ic_menu_report_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+      android:id="@+id/feedImageView"
+      android:layout_width="60dp"
+      android:layout_height="60dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:src="@android:drawable/ic_menu_report_image"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      android:contentDescription="@string/image_placeholder_content_description" />
 
     <TextView
         android:id="@+id/feedTitleTextView"

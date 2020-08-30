@@ -14,16 +14,20 @@
       android:supportsRtl="true"
       android:theme="@style/AppTheme"
       android:usesCleartextTraffic="true">
+
     <activity android:name=".ui.PodcastActivity"
         android:launchMode="singleTop"
         android:theme="@style/AppTheme.NoActionBar">
+
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <action android:name="android.intent.action.SEARCH"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
+
       <meta-data android:name="android.app.searchable"
-        android:resource="@xml/searchable"/>
+        android:resource="@xml/searchable" />
+
     </activity>
 
     <service android:name=".service.PodplayMediaService">
@@ -40,5 +44,4 @@
     </receiver>
 
   </application>
-
 </manifest>
