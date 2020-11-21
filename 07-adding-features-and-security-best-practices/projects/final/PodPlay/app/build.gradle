@@ -20,7 +20,7 @@ android {
   buildTypes {
     debug {
       minifyEnabled true
-      shrinkResources true
+      shrinkResources false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
     release {
@@ -35,7 +35,7 @@ android {
   kotlinOptions {
     jvmTarget = JavaVersion.VERSION_1_8.toString()
   }
-  dynamicFeatures = [':installTimeDeliveryExample']
+  dynamicFeatures = [':installTimeDeliveryExample', ':onDemandDeliveryExample']
 }
 
 dependencies {
