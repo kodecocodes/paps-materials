@@ -9,4 +9,9 @@
     android:icon="@android:drawable/ic_menu_search"
     app:showAsAction="collapseActionView|ifRoom"
     app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+
+  <item android:id="@+id/download_on_demand_module_item"
+    android:title="@string/download"
+    android:icon="@android:drawable/stat_sys_download"
+    app:showAsAction="always"/>
 </menu>

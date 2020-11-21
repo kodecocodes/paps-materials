@@ -37,6 +37,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -48,6 +49,8 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
+import com.google.android.play.core.splitinstall.SplitInstallRequest
 import com.raywenderlich.podplay.adapter.PodcastListAdapter
 import com.raywenderlich.podplay.adapter.PodcastListAdapter.PodcastListAdapterListener
 import com.raywenderlich.podplay.db.PodPlayDatabase
@@ -130,6 +133,33 @@ class PodcastActivity :
     if (podcastRecyclerView.visibility == View.INVISIBLE) {
       searchMenuItem.isVisible = false
     }
+
+    // 1
+    val splitInstallManager = SplitInstallManagerFactory.create(applicationContext)
+
+    //2
+    val request = SplitInstallRequest
+        .newBuilder()
+        .addModule("onDemandDeliveryExample")
+        .build()
+
+    //3
+    splitInstallManager
+        .startInstall(request)
+        .addOnSuccessListener { sessionId ->
+          Toast.makeText(
+              applicationContext,
+              "Module installed succesfully with sessionId $sessionId",
+              Toast.LENGTH_LONG
+          ).show()
+        }
+        .addOnFailureListener { exception ->
+          Toast.makeText(
+            applicationContext,
+            "Module not installed with exception $exception",
+            Toast.LENGTH_LONG
+          ).show()
+        }
 
     return true
   }
