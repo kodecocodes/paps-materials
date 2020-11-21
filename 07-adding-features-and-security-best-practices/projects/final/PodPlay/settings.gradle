@@ -1,1 +1,2 @@
+include ':installTimeDeliveryExample'
 include ':app'

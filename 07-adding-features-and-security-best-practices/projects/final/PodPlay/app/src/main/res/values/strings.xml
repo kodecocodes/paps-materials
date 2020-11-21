@@ -17,4 +17,5 @@
   <string name="text_1x">1x</string>
   <string name="text_0_00">0:00</string>
   <string name="player_speed">%1$sx</string>
+  <string name="title_installtimedeliveryexample">Install Time Delivery Example</string>
 </resources>
