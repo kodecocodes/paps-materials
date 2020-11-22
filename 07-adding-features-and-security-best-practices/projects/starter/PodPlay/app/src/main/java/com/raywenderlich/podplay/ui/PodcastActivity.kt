@@ -76,6 +76,7 @@ class PodcastActivity :
   private lateinit var podcastListAdapter: PodcastListAdapter
   private lateinit var searchMenuItem: MenuItem
   private lateinit var downloadMenuItem: MenuItem
+  private lateinit var notesMenuItem: MenuItem
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

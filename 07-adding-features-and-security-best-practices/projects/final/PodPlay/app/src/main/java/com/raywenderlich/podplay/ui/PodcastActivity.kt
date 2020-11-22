@@ -79,6 +79,8 @@ class PodcastActivity :
   private lateinit var podcastListAdapter: PodcastListAdapter
   private lateinit var searchMenuItem: MenuItem
   private lateinit var downloadMenuItem: MenuItem
+  private lateinit var notesMenuItem: MenuItem
+  private var areNotesEnabled = true
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -141,6 +143,17 @@ class PodcastActivity :
       downloadModule()
     }
 
+    notesMenuItem = menu.findItem(R.id.write_notes_item)
+
+    notesMenuItem.setOnMenuItemClickListener {
+      visibilityOfNotesFeature()
+    }
+
+    return true
+  }
+
+  private fun visibilityOfNotesFeature(): Boolean {
+    notesMenuItem.isVisible = areNotesEnabled
     return true
   }
 

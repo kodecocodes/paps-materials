@@ -14,4 +14,9 @@
     android:title="@string/download"
     android:icon="@android:drawable/stat_sys_download"
     app:showAsAction="always"/>
+
+  <item android:id="@+id/write_notes_item"
+    android:title="@string/notes"
+    android:icon="@android:drawable/ic_menu_edit"
+    app:showAsAction="always"/>
 </menu>
