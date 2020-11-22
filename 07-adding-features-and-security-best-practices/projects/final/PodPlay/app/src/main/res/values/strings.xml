@@ -21,4 +21,5 @@
   <string name="title_installtimedeliveryexample">Install Time Delivery Example</string>
   <string name="title_ondemanddeliveryexample">On Demand Delivery Example</string>
   <string name="title_conditionaldeliveryexample">Conditional Delivery Example</string>
+  <string name="title_instantmoduleexample">Instant Module Example</string>
 </resources>

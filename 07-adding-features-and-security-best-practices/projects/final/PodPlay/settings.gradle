@@ -1,3 +1,4 @@
+include ':instantModuleExample'
 include ':conditionalDeliveryExample'
 include ':onDemandDeliveryExample'
 include ':installTimeDeliveryExample'
