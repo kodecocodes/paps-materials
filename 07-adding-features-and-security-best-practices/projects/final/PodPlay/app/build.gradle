@@ -34,7 +34,7 @@ android {
   kotlinOptions {
     jvmTarget = JavaVersion.VERSION_1_8.toString()
   }
-  dynamicFeatures = [':installTimeDeliveryExample', ':onDemandDeliveryExample']
+  dynamicFeatures = [':installTimeDeliveryExample', ':onDemandDeliveryExample', ':conditionalDeliveryExample']
 }
 
 dependencies {

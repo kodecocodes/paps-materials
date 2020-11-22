@@ -75,6 +75,7 @@ class PodcastActivity :
   private val podcastViewModel by viewModels<PodcastViewModel>()
   private lateinit var podcastListAdapter: PodcastListAdapter
   private lateinit var searchMenuItem: MenuItem
+  private lateinit var downloadMenuItem: MenuItem
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

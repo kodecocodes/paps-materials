@@ -78,6 +78,7 @@ class PodcastActivity :
   private val podcastViewModel by viewModels<PodcastViewModel>()
   private lateinit var podcastListAdapter: PodcastListAdapter
   private lateinit var searchMenuItem: MenuItem
+  private lateinit var downloadMenuItem: MenuItem
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -134,6 +135,16 @@ class PodcastActivity :
       searchMenuItem.isVisible = false
     }
 
+    downloadMenuItem = menu.findItem(R.id.download_on_demand_module_item)
+
+    downloadMenuItem.setOnMenuItemClickListener {
+      downloadModule()
+    }
+
+    return true
+  }
+
+  private fun downloadModule(): Boolean {
     // 1
     val splitInstallManager = SplitInstallManagerFactory.create(applicationContext)
 
@@ -155,9 +166,9 @@ class PodcastActivity :
         }
         .addOnFailureListener { exception ->
           Toast.makeText(
-            applicationContext,
-            "Module not installed with exception $exception",
-            Toast.LENGTH_LONG
+              applicationContext,
+              "Module not installed with exception $exception",
+              Toast.LENGTH_LONG
           ).show()
         }
 
