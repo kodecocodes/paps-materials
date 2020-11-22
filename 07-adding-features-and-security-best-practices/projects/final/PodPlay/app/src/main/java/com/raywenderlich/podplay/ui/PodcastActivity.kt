@@ -149,7 +149,7 @@ class PodcastActivity :
         .addOnSuccessListener { sessionId ->
           Toast.makeText(
               applicationContext,
-              "Module installed succesfully with sessionId $sessionId",
+              "Module installed successfully with sessionId $sessionId",
               Toast.LENGTH_LONG
           ).show()
         }
