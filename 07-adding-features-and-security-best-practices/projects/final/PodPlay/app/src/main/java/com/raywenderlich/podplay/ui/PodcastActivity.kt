@@ -145,9 +145,7 @@ class PodcastActivity :
 
     notesMenuItem = menu.findItem(R.id.write_notes_item)
 
-    notesMenuItem.setOnMenuItemClickListener {
-      visibilityOfNotesFeature()
-    }
+    visibilityOfNotesFeature()
 
     return true
   }
