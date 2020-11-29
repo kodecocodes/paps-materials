@@ -81,6 +81,8 @@ class PodcastActivity :
   private lateinit var downloadMenuItem: MenuItem
   private lateinit var notesMenuItem: MenuItem
   private var areNotesEnabled = true
+  private var isInstallTimeModuleAvailable = true
+  private lateinit var settingsMenuItem: MenuItem
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -135,6 +137,16 @@ class PodcastActivity :
 
     if (podcastRecyclerView.visibility == View.INVISIBLE) {
       searchMenuItem.isVisible = false
+    }
+
+    if (isInstallTimeModuleAvailable) {
+      settingsMenuItem = menu.findItem(R.id.install_time_delivery_button)
+    }
+
+    settingsMenuItem.setOnMenuItemClickListener {
+      val intent = Intent().setClassName(this,"com.raywenderlich.installtimedeliveryexample.SettingsActivity")
+      startActivity(intent)
+      true
     }
 
     downloadMenuItem = menu.findItem(R.id.download_on_demand_module_item)

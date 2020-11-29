@@ -77,6 +77,8 @@ class PodcastActivity :
   private lateinit var searchMenuItem: MenuItem
   private lateinit var downloadMenuItem: MenuItem
   private lateinit var notesMenuItem: MenuItem
+  private var isInstallTimeModuleAvailable = true
+  private lateinit var settingsMenuItem: MenuItem
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

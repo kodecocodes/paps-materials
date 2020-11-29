@@ -7,8 +7,14 @@
   <item android:id="@+id/search_item"
     android:title="@string/search"
     android:icon="@android:drawable/ic_menu_search"
-    app:showAsAction="collapseActionView|ifRoom"
+    app:showAsAction="ifRoom"
     app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+
+  <item
+    android:id="@+id/install_time_delivery_button"
+    android:title="@string/install_time_delivery"
+    android:icon="@android:drawable/ic_menu_preferences"
+    app:showAsAction="ifRoom"/>
 
   <item android:id="@+id/download_on_demand_module_item"
     android:title="@string/download"
