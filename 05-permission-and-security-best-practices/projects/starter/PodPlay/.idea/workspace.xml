@@ -5,16 +5,19 @@
       <config />
     </shared>
   </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="61d141d3-2ea9-485b-8b05-a4bb16fc5b51" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/raywenderlich/podplay/ui/EpisodePlayerFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/raywenderlich/podplay/ui/EpisodePlayerFragment.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="9C9AYV05BG" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[9C9AYV05BG]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -45,7 +48,6 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -54,7 +56,9 @@
     <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/../../../../../builds" />
     <property name="ExportApk.BuildVariants" value="release" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
@@ -65,12 +69,13 @@
       </method>
     </configuration>
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
-      <module name="app" />
+      <module name="PodPlay.app" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="DEPLOY_AS_INSTANT" value="false" />
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
       <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
@@ -106,11 +111,16 @@
       </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
@@ -130,45 +140,57 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1352" height="1373" key="GridCell.Tab.0.bottom" timestamp="1599154593604">
-      <screen x="0" y="23" width="1792" height="1097" />
+    <state x="368" y="137" key="#Plugins" timestamp="1609022286203">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1352" height="1373" key="GridCell.Tab.0.bottom/1792.-297.2560.1417/0.23.1792.1097@0.23.1792.1097" timestamp="1599154593604" />
-    <state width="1352" height="1373" key="GridCell.Tab.0.center" timestamp="1599154593603">
-      <screen x="0" y="23" width="1792" height="1097" />
+    <state x="368" y="137" key="#Plugins/0.25.1536.935@0.25.1536.935" timestamp="1609022286203" />
+    <state x="525" y="366" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1609024126534">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1352" height="1373" key="GridCell.Tab.0.center/1792.-297.2560.1417/0.23.1792.1097@0.23.1792.1097" timestamp="1599154593603" />
-    <state width="1352" height="1373" key="GridCell.Tab.0.left" timestamp="1599154593603">
-      <screen x="0" y="23" width="1792" height="1097" />
+    <state x="525" y="366" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.25.1536.935@0.25.1536.935" timestamp="1609024126534" />
+    <state width="747" height="306" key="GridCell.Tab.0.bottom" timestamp="1609024684865">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1352" height="1373" key="GridCell.Tab.0.left/1792.-297.2560.1417/0.23.1792.1097@0.23.1792.1097" timestamp="1599154593603" />
-    <state width="1352" height="1373" key="GridCell.Tab.0.right" timestamp="1599154593604">
-      <screen x="0" y="23" width="1792" height="1097" />
+    <state width="747" height="306" key="GridCell.Tab.0.bottom/-1920.-95.1920.1055/0.25.1536.935@0.25.1536.935" timestamp="1608936541057" />
+    <state width="747" height="306" key="GridCell.Tab.0.bottom/0.25.1536.935@0.25.1536.935" timestamp="1609024684865" />
+    <state width="747" height="306" key="GridCell.Tab.0.center" timestamp="1609024684864">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1352" height="1373" key="GridCell.Tab.0.right/1792.-297.2560.1417/0.23.1792.1097@0.23.1792.1097" timestamp="1599154593604" />
-    <state width="1352" height="1373" key="GridCell.Tab.1.bottom" timestamp="1599154593604">
-      <screen x="0" y="23" width="1792" height="1097" />
+    <state width="747" height="306" key="GridCell.Tab.0.center/-1920.-95.1920.1055/0.25.1536.935@0.25.1536.935" timestamp="1608936541056" />
+    <state width="747" height="306" key="GridCell.Tab.0.center/0.25.1536.935@0.25.1536.935" timestamp="1609024684864" />
+    <state width="747" height="306" key="GridCell.Tab.0.left" timestamp="1609024684863">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1352" height="1373" key="GridCell.Tab.1.bottom/1792.-297.2560.1417/0.23.1792.1097@0.23.1792.1097" timestamp="1599154593604" />
-    <state width="1352" height="1373" key="GridCell.Tab.1.center" timestamp="1599154593604">
-      <screen x="0" y="23" width="1792" height="1097" />
+    <state width="747" height="306" key="GridCell.Tab.0.left/-1920.-95.1920.1055/0.25.1536.935@0.25.1536.935" timestamp="1608936541056" />
+    <state width="747" height="306" key="GridCell.Tab.0.left/0.25.1536.935@0.25.1536.935" timestamp="1609024684863" />
+    <state width="747" height="306" key="GridCell.Tab.0.right" timestamp="1609024684864">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1352" height="1373" key="GridCell.Tab.1.center/1792.-297.2560.1417/0.23.1792.1097@0.23.1792.1097" timestamp="1599154593604" />
-    <state width="1352" height="1373" key="GridCell.Tab.1.left" timestamp="1599154593604">
-      <screen x="0" y="23" width="1792" height="1097" />
+    <state width="747" height="306" key="GridCell.Tab.0.right/-1920.-95.1920.1055/0.25.1536.935@0.25.1536.935" timestamp="1608936541056" />
+    <state width="747" height="306" key="GridCell.Tab.0.right/0.25.1536.935@0.25.1536.935" timestamp="1609024684864" />
+    <state width="747" height="306" key="GridCell.Tab.1.bottom" timestamp="1609024685940">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1352" height="1373" key="GridCell.Tab.1.left/1792.-297.2560.1417/0.23.1792.1097@0.23.1792.1097" timestamp="1599154593604" />
-    <state width="1352" height="1373" key="GridCell.Tab.1.right" timestamp="1599154593604">
-      <screen x="0" y="23" width="1792" height="1097" />
+    <state width="747" height="306" key="GridCell.Tab.1.bottom/-1920.-95.1920.1055/0.25.1536.935@0.25.1536.935" timestamp="1608936541057" />
+    <state width="747" height="306" key="GridCell.Tab.1.bottom/0.25.1536.935@0.25.1536.935" timestamp="1609024685940" />
+    <state width="747" height="306" key="GridCell.Tab.1.center" timestamp="1609024685939">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1352" height="1373" key="GridCell.Tab.1.right/1792.-297.2560.1417/0.23.1792.1097@0.23.1792.1097" timestamp="1599154593604" />
-    <state x="1825" y="144" key="SettingsEditor" timestamp="1599014326744">
-      <screen x="1792" y="-297" width="2560" height="1417" />
+    <state width="747" height="306" key="GridCell.Tab.1.center/-1920.-95.1920.1055/0.25.1536.935@0.25.1536.935" timestamp="1608936541057" />
+    <state width="747" height="306" key="GridCell.Tab.1.center/0.25.1536.935@0.25.1536.935" timestamp="1609024685939" />
+    <state width="747" height="306" key="GridCell.Tab.1.left" timestamp="1609024685938">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state x="1825" y="144" key="SettingsEditor/1792.-297.2560.1417/0.23.1792.1097@0.23.1792.1097" timestamp="1599014326744" />
-    <state x="566" y="404" key="com.intellij.ide.util.TipDialog" timestamp="1598979631940">
-      <screen x="0" y="23" width="1792" height="1097" />
+    <state width="747" height="306" key="GridCell.Tab.1.left/-1920.-95.1920.1055/0.25.1536.935@0.25.1536.935" timestamp="1608936541057" />
+    <state width="747" height="306" key="GridCell.Tab.1.left/0.25.1536.935@0.25.1536.935" timestamp="1609024685938" />
+    <state width="747" height="306" key="GridCell.Tab.1.right" timestamp="1609024685939">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state x="566" y="404" key="com.intellij.ide.util.TipDialog/1792.-297.2560.1417/0.23.1792.1097@0.23.1792.1097" timestamp="1598979631940" />
+    <state width="747" height="306" key="GridCell.Tab.1.right/-1920.-95.1920.1055/0.25.1536.935@0.25.1536.935" timestamp="1608936541057" />
+    <state width="747" height="306" key="GridCell.Tab.1.right/0.25.1536.935@0.25.1536.935" timestamp="1609024685939" />
+    <state x="269" y="128" key="SettingsEditor" timestamp="1609023020121">
+      <screen x="0" y="25" width="1536" height="935" />
+    </state>
+    <state x="269" y="128" key="SettingsEditor/0.25.1536.935@0.25.1536.935" timestamp="1609023020121" />
   </component>
 </project>

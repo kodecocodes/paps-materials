@@ -37,7 +37,6 @@ import android.graphics.Color
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaMetadataCompat
@@ -89,11 +88,8 @@ class EpisodePlayerFragment : Fragment() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     retainInstance = true
-    isVideo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      podcastViewModel.activeEpisodeViewData?.isVideo ?: false
-    } else {
-      false
-    }
+    isVideo =
+            podcastViewModel.activeEpisodeViewData?.isVideo ?: false
     if (!isVideo) {
       initMediaBrowser()
     }
@@ -159,12 +155,8 @@ class EpisodePlayerFragment : Fragment() {
     playToggleButton.setOnClickListener {
       togglePlayPause()
     }
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      speedButton.setOnClickListener {
-        changeSpeed()
-      }
-    } else {
-      speedButton.visibility = View.INVISIBLE
+    speedButton.setOnClickListener {
+      changeSpeed()
     }
     forwardButton.setOnClickListener {
       seekBy(30)
@@ -246,8 +238,8 @@ class EpisodePlayerFragment : Fragment() {
         mediaPlayer.setDataSource(podcastViewModel.activeEpisodeViewData?.mediaUrl)
         mediaPlayer.setOnPreparedListener {
           val fragmentActivity = activity as FragmentActivity
-          val episodeMediaCallback = PodplayMediaCallback(fragmentActivity, mediaSession!!, it)
-          mediaSession!!.setCallback(episodeMediaCallback)
+          val episodeMediaCallback = mediaSession?.let { it1 -> PodplayMediaCallback(fragmentActivity, it1, it) }
+          mediaSession?.setCallback(episodeMediaCallback)
           setSurfaceSize()
           if (playOnPrepare) {
             togglePlayPause()
