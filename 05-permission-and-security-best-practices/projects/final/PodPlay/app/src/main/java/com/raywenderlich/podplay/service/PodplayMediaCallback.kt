@@ -160,7 +160,7 @@ class PodplayMediaCallback(
         audioManager.abandonAudioFocusRequest(it)
       }
     } else {
-      audioManager.abandonAudioFocus(null)
+      focusRequest?.let { audioManager.abandonAudioFocusRequest(it) }
     }
   }
 
@@ -189,27 +189,25 @@ class PodplayMediaCallback(
       position = it.currentPosition.toLong()
     }
 
-    var speed = 1.0f
+    var speed: Float
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      speed = newSpeed ?: (mediaPlayer?.playbackParams?.speed ?: 1.0f)
-      mediaPlayer?.let { mediaPlayer ->
-        try {
-          mediaPlayer.playbackParams = mediaPlayer.playbackParams.setSpeed(speed)
-        } catch (e: Exception) {
+    (newSpeed ?: (mediaPlayer?.playbackParams?.speed ?: 1.0f)).also { speed = it }
+    mediaPlayer?.let { mediaPlayer ->
+      try {
+        mediaPlayer.playbackParams = mediaPlayer.playbackParams.setSpeed(speed)
+      } catch (e: Exception) {
 
-          mediaPlayer.reset()
-          mediaUri?.let { mediaUri ->
-            mediaPlayer.setDataSource(context, mediaUri)
-          }
-          mediaPlayer.prepare()
+        mediaPlayer.reset()
+        mediaUri?.let { mediaUri ->
+          mediaPlayer.setDataSource(context, mediaUri)
+        }
+        mediaPlayer.prepare()
 
-          mediaPlayer.playbackParams = mediaPlayer.playbackParams.setSpeed(speed)
-          mediaPlayer.seekTo(position.toInt())
+        mediaPlayer.playbackParams = mediaPlayer.playbackParams.setSpeed(speed)
+        mediaPlayer.seekTo(position.toInt())
 
-          if (state == PlaybackStateCompat.STATE_PLAYING) {
-            mediaPlayer.start()
-          }
+        if (state == PlaybackStateCompat.STATE_PLAYING) {
+          mediaPlayer.start()
         }
       }
     }
