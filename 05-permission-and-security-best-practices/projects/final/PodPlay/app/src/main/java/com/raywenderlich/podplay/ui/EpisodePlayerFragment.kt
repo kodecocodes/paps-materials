@@ -238,8 +238,8 @@ class EpisodePlayerFragment : Fragment() {
         mediaPlayer.setDataSource(podcastViewModel.activeEpisodeViewData?.mediaUrl)
         mediaPlayer.setOnPreparedListener {
           val fragmentActivity = activity as FragmentActivity
-          val episodeMediaCallback = PodplayMediaCallback(fragmentActivity, mediaSession!!, it)
-          mediaSession!!.setCallback(episodeMediaCallback)
+          val episodeMediaCallback = mediaSession?.let { it1 -> PodplayMediaCallback(fragmentActivity, it1, it) }
+          mediaSession?.setCallback(episodeMediaCallback)
           setSurfaceSize()
           if (playOnPrepare) {
             togglePlayPause()
