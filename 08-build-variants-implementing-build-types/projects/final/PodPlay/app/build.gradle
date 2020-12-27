@@ -26,6 +26,9 @@ android {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
+    qa {
+
+    }
   }
   compileOptions {
     sourceCompatibility = 1.8
