@@ -45,6 +45,9 @@ android {
 
 
 dependencies {
+
+  def activity_version = "1.2.0-rc01"
+
   implementation fileTree(dir: 'libs', include: ['*.jar'])
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
   implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -53,6 +56,8 @@ dependencies {
   implementation 'com.google.android.material:material:1.2.1'
   implementation "androidx.recyclerview:recyclerview:1.1.0"
   implementation "androidx.media:media:1.2.1"
+
+  implementation "androidx.activity:activity-ktx:$activity_version"
 
   implementation "androidx.fragment:fragment-ktx:1.2.5"
   implementation "androidx.activity:activity-ktx:1.1.0"

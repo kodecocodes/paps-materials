@@ -33,10 +33,12 @@ package com.raywenderlich.podplay.ui
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -187,12 +189,52 @@ class PodcastActivity :
   }
 
   private fun performSearch(term: String) {
-    showProgressBar()
-    searchViewModel.searchPodcasts(term) { results ->
-      hideProgressBar()
-      toolbar.title = term
-      podcastListAdapter.setSearchData(results)
+    val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+              if (isGranted) {
+                // Permission is granted. Continue the action or workflow in your
+                // app.
+                println("permission is granted")
+
+              } else {
+                // Explain to the user that the feature is unavailable because the
+                // features requires a permission that the user has denied. At the
+                // same time, respect the user's decision. Don't link to system
+                // settings in an effort to convince the user to change their
+                // decision.
+                println("explain to the user...")
+              }
+            }
+
+    when {
+      // 1
+      checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED -> {
+        // Permission granted. Proceed to use the location.
+        showProgressBar()
+        searchViewModel.searchPodcasts(term) { results ->
+          hideProgressBar()
+          toolbar.title = term
+          podcastListAdapter.setSearchData(results)
+        }
+      }
+      // 2
+      shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_COARSE_LOCATION) -> {
+        // TODO
+        // In an educational UI, explain to the user why your app requires this
+        // permission for a specific feature to behave as expected. In this UI,
+        // include a "cancel" or "no thanks" button that allows the user to
+        // continue using your app without granting the permission.
+        println("show educational UI here")
+      }
+      else -> {
+        // 3
+        // To display the system permissions dialog when necessary, call the launch() method on the instance of ActivityResultLauncher that you saved in the previous step.
+        requestPermissionLauncher.launch(
+                android.Manifest.permission.ACCESS_COARSE_LOCATION)
+      }
+
+
     }
+
   }
 
   private fun handleIntent(intent: Intent) {
