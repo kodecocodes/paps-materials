@@ -7,6 +7,11 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
+  signingConfigs {
+    release {
+      // Here you will see the information of your certificates
+    }
+  }
   compileSdkVersion 30
   buildToolsVersion = '30.0.2'
   defaultConfig {
@@ -25,6 +30,7 @@ android {
     release {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      signingConfig signingConfigs.release
     }
     qa {
       initWith debug
