@@ -39,9 +39,9 @@ import retrofit2.Response
 
 class ItunesRepo(private val itunesService: ItunesService) {
 
-  fun searchByTerm(term: String, callBack: (List<ItunesPodcast>?) -> Unit) {
+  fun searchByTerm(term: String, country: String, callBack: (List<ItunesPodcast>?) -> Unit) {
 
-    val podcastCall = itunesService.searchPodcastByTerm(term)
+    val podcastCall = itunesService.searchPodcastByTermAndCountry(term, country)
 
     podcastCall.enqueue(object : Callback<PodcastResponse> {
       override fun onFailure(call: Call<PodcastResponse>?, t: Throwable?) {

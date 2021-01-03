@@ -35,10 +35,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 interface ItunesService {
   @GET("/search?media=podcast")
   fun searchPodcastByTerm(@Query("term") term: String): Call<PodcastResponse>
+
+  @GET(value = "/search?media=podcast")
+  fun searchPodcastByTermAndCountry(@Query("term") term: String, @Query("country") country: String): Call<PodcastResponse>
 
   companion object {
     val instance: ItunesService by lazy {

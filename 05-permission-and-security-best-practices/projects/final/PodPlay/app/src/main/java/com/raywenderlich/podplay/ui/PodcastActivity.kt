@@ -35,6 +35,8 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Geocoder
+import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
@@ -54,6 +56,8 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import com.raywenderlich.podplay.BuildConfig
 import com.raywenderlich.podplay.adapter.PodcastListAdapter
@@ -82,6 +86,7 @@ class PodcastActivity :
   private val podcastViewModel by viewModels<PodcastViewModel>()
   private lateinit var podcastListAdapter: PodcastListAdapter
   private lateinit var searchMenuItem: MenuItem
+  private lateinit var fusedLocationClient: FusedLocationProviderClient // Location Services Client
 
   private var searchTerm = ""
   private var searchCountry = "US" // search United State, by default
@@ -287,9 +292,32 @@ class PodcastActivity :
     }
   }
 
+  /**
+   * Sets the user's country code based on fused location service
+   */
+  private fun setCountry() {
+    //Create Location Services Client
+    fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+      return
+    }
+    fusedLocationClient.lastLocation
+            .addOnSuccessListener { location : Location? ->
+              // Got last known location. In some rare situations this can be null.
+              location?.let {
+                val geoCoder = Geocoder(this)
+                val addresses = geoCoder.getFromLocation(location.latitude,location.longitude, 1)
+                searchCountry = addresses[0].countryCode
+              }
+            }
+
+
+  }
   private fun searchWithLocation() {
     showProgressBar()
-    searchViewModel.searchPodcasts(searchTerm) { results ->
+    setCountry()
+    searchViewModel.searchPodcasts(searchTerm, country = searchCountry) { results ->
       hideProgressBar()
       toolbar.title = searchTerm
       podcastListAdapter.setSearchData(results)

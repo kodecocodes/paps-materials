@@ -58,8 +58,8 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
     )
   }
 
-  fun searchPodcasts(term: String, callback: (List<PodcastSummaryViewData>) -> Unit) {
-    iTunesRepo?.searchByTerm(term) { results ->
+  fun searchPodcasts(term: String, country: String, callback: (List<PodcastSummaryViewData>) -> Unit) {
+    iTunesRepo?.searchByTerm(term, country) { results ->
       if (results == null) {
         callback(emptyList())
       } else {
