@@ -30,19 +30,23 @@
 
 package com.raywenderlich.podplay.ui
 
+import android.Manifest
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.Constraints
@@ -50,10 +54,13 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.google.android.material.snackbar.Snackbar
+import com.raywenderlich.podplay.BuildConfig
 import com.raywenderlich.podplay.adapter.PodcastListAdapter
 import com.raywenderlich.podplay.adapter.PodcastListAdapter.PodcastListAdapterListener
 import com.raywenderlich.podplay.db.PodPlayDatabase
 import com.raywenderlich.podplay.R
+import com.raywenderlich.podplay.model.LOCATION_PERMISSION_REQUEST_CODE
 import com.raywenderlich.podplay.repository.ItunesRepo
 import com.raywenderlich.podplay.repository.PodcastRepo
 import com.raywenderlich.podplay.service.FeedService
@@ -63,10 +70,8 @@ import com.raywenderlich.podplay.viewmodel.PodcastViewModel
 import com.raywenderlich.podplay.viewmodel.PodcastViewModel.EpisodeViewData
 import com.raywenderlich.podplay.viewmodel.SearchViewModel
 import com.raywenderlich.podplay.worker.EpisodeUpdateWorker
+import kotlinx.android.synthetic.main.activity_podcast.*
 import java.util.concurrent.TimeUnit
-import kotlinx.android.synthetic.main.activity_podcast.podcastRecyclerView
-import kotlinx.android.synthetic.main.activity_podcast.progressBar
-import kotlinx.android.synthetic.main.activity_podcast.toolbar
 
 class PodcastActivity :
     AppCompatActivity(),
@@ -77,6 +82,10 @@ class PodcastActivity :
   private val podcastViewModel by viewModels<PodcastViewModel>()
   private lateinit var podcastListAdapter: PodcastListAdapter
   private lateinit var searchMenuItem: MenuItem
+
+  private var searchTerm = ""
+  private var searchCountry = "US" // search United State, by default
+
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -188,53 +197,103 @@ class PodcastActivity :
     }
   }
 
+  override fun onRequestPermissionsResult(
+          requestCode: Int,
+          permissions: Array<String>,
+          grantResults: IntArray
+  ) {
+    Log.d("PodcastActivity", "onRequestPermissionResult")
+
+    when (requestCode) {
+      LOCATION_PERMISSION_REQUEST_CODE -> when {
+        grantResults.isEmpty() ->
+          // If user interaction was interrupted, the permission request
+          // is cancelled and you receive empty arrays.
+          Log.d("PodcastActivity", "User interaction was cancelled.")
+
+        grantResults[0] == PackageManager.PERMISSION_GRANTED ->
+          // Permission was granted.
+          searchWithLocation()
+
+        else -> {
+          // Permission denied.
+          Snackbar.make(
+                  podcastDetailsContainer,
+                  R.string.permission_denied_explanation,
+                  Snackbar.LENGTH_LONG
+          )
+                  .setAction(R.string.settings) {
+                    // Build intent that displays the App settings screen.
+                    val intent = Intent()
+                    intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                    val uri = Uri.fromParts(
+                            "package",
+                            BuildConfig.APPLICATION_ID,
+                            null
+                    )
+                    intent.data = uri
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                  }
+                  .show()
+        }
+        // TODO: do the search anyway, but use a default location
+      }
+    }
+  }
+
   private fun performSearch(term: String) {
-    val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-              if (isGranted) {
-                // Permission is granted. Continue the action or workflow in your
-                // app.
-                println("permission is granted")
-
-              } else {
-                // Explain to the user that the feature is unavailable because the
-                // features requires a permission that the user has denied. At the
-                // same time, respect the user's decision. Don't link to system
-                // settings in an effort to convince the user to change their
-                // decision.
-                println("explain to the user...")
-              }
-            }
-
+    searchTerm = term
+    //1
     when {
       // 1
-      checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED -> {
+      checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED -> {
         // Permission granted. Proceed to use the location.
-        showProgressBar()
-        searchViewModel.searchPodcasts(term) { results ->
-          hideProgressBar()
-          toolbar.title = term
-          podcastListAdapter.setSearchData(results)
-        }
+        searchWithLocation()
       }
       // 2
-      shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_COARSE_LOCATION) -> {
-        // TODO
+      // If the user denied a previous request, but didn't check "Don't ask again", provide
+      // additional rationale.
+      shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION) -> {
         // In an educational UI, explain to the user why your app requires this
         // permission for a specific feature to behave as expected. In this UI,
-        // include a "cancel" or "no thanks" button that allows the user to
+        // if possible, include a "cancel" or "no thanks" button that allows the user to
         // continue using your app without granting the permission.
-        println("show educational UI here")
+        Snackbar.make(
+                podcastDetailsContainer,
+                R.string.permission_rationale,
+                Snackbar.LENGTH_LONG
+        )
+                .setAction(R.string.ok) {
+                  // Request permission
+                  ActivityCompat.requestPermissions(
+                          this,
+                          arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                          LOCATION_PERMISSION_REQUEST_CODE
+                  )
+                }
+                .show()
       }
       else -> {
         // 3
-        // To display the system permissions dialog when necessary, call the launch() method on the instance of ActivityResultLauncher that you saved in the previous step.
-        requestPermissionLauncher.launch(
-                android.Manifest.permission.ACCESS_COARSE_LOCATION)
+        // Display the system permissions dialog when necessary
+        Log.d("PodcastActivity", "Request location permission")
+        ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+        )
       }
-
-
     }
+  }
 
+  private fun searchWithLocation() {
+    showProgressBar()
+    searchViewModel.searchPodcasts(searchTerm) { results ->
+      hideProgressBar()
+      toolbar.title = searchTerm
+      podcastListAdapter.setSearchData(results)
+    }
   }
 
   private fun handleIntent(intent: Intent) {
