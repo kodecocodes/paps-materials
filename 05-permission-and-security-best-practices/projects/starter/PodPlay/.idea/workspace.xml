@@ -10,8 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="61d141d3-2ea9-485b-8b05-a4bb16fc5b51" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../final/PodPlay/app/src/main/java/com/raywenderlich/podplay/service/ItunesService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../final/PodPlay/app/src/main/java/com/raywenderlich/podplay/service/ItunesService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../final/PodPlay/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../final/PodPlay/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../final/PodPlay/app/src/main/java/com/raywenderlich/podplay/ui/PodcastActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../final/PodPlay/app/src/main/java/com/raywenderlich/podplay/ui/PodcastActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

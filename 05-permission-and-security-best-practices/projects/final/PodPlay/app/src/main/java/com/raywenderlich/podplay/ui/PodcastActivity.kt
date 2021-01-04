@@ -299,20 +299,21 @@ class PodcastActivity :
     //Create Location Services Client
     fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+    // 1
     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
       return
     }
+    // 2
     fusedLocationClient.lastLocation
             .addOnSuccessListener { location : Location? ->
               // Got last known location. In some rare situations this can be null.
               location?.let {
+                // 3
                 val geoCoder = Geocoder(this)
                 val addresses = geoCoder.getFromLocation(location.latitude,location.longitude, 1)
                 searchCountry = addresses[0].countryCode
               }
             }
-
-
   }
   private fun searchWithLocation() {
     showProgressBar()
