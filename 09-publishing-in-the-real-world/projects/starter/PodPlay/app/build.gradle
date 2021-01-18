@@ -7,13 +7,8 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-  signingConfigs {
-    release {
-      // Here you will see the information of your certificates
-    }
-  }
   compileSdkVersion 30
-  buildToolsVersion = '30.0.2'
+  buildToolsVersion = '30.0.3'
   defaultConfig {
     applicationId "com.raywenderlich.podplay"
     minSdkVersion 23
@@ -30,7 +25,6 @@ android {
     release {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-      signingConfig signingConfigs.release
     }
     qa {
       initWith debug
