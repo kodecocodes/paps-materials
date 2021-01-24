@@ -39,7 +39,7 @@ import retrofit2.Response
 
 class ItunesRepo(private val itunesService: ItunesService) {
 
-  fun searchByTerm(term: String, country: String, callBack: (List<ItunesPodcast>?) -> Unit) {
+  fun searchByTermAndCountry(term: String, country: String, callBack: (List<ItunesPodcast>?) -> Unit) {
 
     val podcastCall = itunesService.searchPodcastByTermAndCountry(term, country)
 
