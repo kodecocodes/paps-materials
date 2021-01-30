@@ -89,7 +89,7 @@ class PodcastActivity :
   private lateinit var fusedLocationClient: FusedLocationProviderClient // Location Services Client
 
   private var searchTerm = ""
-  private var searchCountry = "US" // search United State, by default
+  private val DEFAULT_COUNTRY = "US" // search United State, by default
 
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -203,12 +203,10 @@ class PodcastActivity :
   }
 
   override fun onRequestPermissionsResult(
-          requestCode: Int,
-          permissions: Array<String>,
-          grantResults: IntArray
+      requestCode: Int,
+      permissions: Array<String>,
+      grantResults: IntArray
   ) {
-    Log.d("PodcastActivity", "onRequestPermissionResult")
-
     when (requestCode) {
       LOCATION_PERMISSION_REQUEST_CODE -> when {
         grantResults.isEmpty() ->
@@ -218,7 +216,7 @@ class PodcastActivity :
 
         grantResults[0] == PackageManager.PERMISSION_GRANTED ->
           // Permission was granted.
-          searchWithLocation()
+          searchUsingLocation(searchTerm)
 
         else -> {
           // Permission denied.
@@ -241,20 +239,19 @@ class PodcastActivity :
                     startActivity(intent)
                   }
                   .show()
+          performSearch(searchTerm, DEFAULT_COUNTRY)
         }
-        // TODO: do the search anyway, but use a default location
       }
     }
   }
 
-  private fun performSearch(term: String) {
+  private fun checkLocationPermissionAndSearch(term: String) {
     searchTerm = term
-    //1
     when {
       // 1
       checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED -> {
         // Permission granted. Proceed to use the location.
-        searchWithLocation()
+        searchUsingLocation(term)
       }
       // 2
       // If the user denied a previous request, but didn't check "Don't ask again", provide
@@ -273,7 +270,7 @@ class PodcastActivity :
                   // Request permission
                   ActivityCompat.requestPermissions(
                           this,
-                          arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                          arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
                           LOCATION_PERMISSION_REQUEST_CODE
                   )
                 }
@@ -285,7 +282,7 @@ class PodcastActivity :
         Log.d("PodcastActivity", "Request location permission")
         ActivityCompat.requestPermissions(
                 this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
                 LOCATION_PERMISSION_REQUEST_CODE
         )
       }
@@ -295,12 +292,12 @@ class PodcastActivity :
   /**
    * Sets the user's country code based on fused location service
    */
-  private fun setCountry() {
+  private fun searchUsingLocation(searchTerm: String) {
     //Create Location Services Client
     fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
     // 1
-    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
       return
     }
     // 2
@@ -311,13 +308,16 @@ class PodcastActivity :
                 // 3
                 val geoCoder = Geocoder(this)
                 val addresses = geoCoder.getFromLocation(location.latitude,location.longitude, 1)
-                searchCountry = addresses[0].countryCode
+                val searchCountry = addresses[0].countryCode
+                performSearch(searchTerm, searchCountry)
               }
+            }.addOnFailureListener {
+                performSearch(searchTerm, DEFAULT_COUNTRY)
             }
   }
-  private fun searchWithLocation() {
+
+  private fun performSearch(searchTerm: String, searchCountry: String) {
     showProgressBar()
-    setCountry()
     searchViewModel.searchPodcasts(searchTerm, country = searchCountry) { results ->
       hideProgressBar()
       toolbar.title = searchTerm
@@ -328,7 +328,7 @@ class PodcastActivity :
   private fun handleIntent(intent: Intent) {
     if (Intent.ACTION_SEARCH == intent.action) {
       val query = intent.getStringExtra(SearchManager.QUERY) ?: return
-      performSearch(query)
+      checkLocationPermissionAndSearch(query)
     }
     val podcastFeedUrl = intent.getStringExtra(EpisodeUpdateWorker.EXTRA_FEED_URL)
     if (podcastFeedUrl != null) {
