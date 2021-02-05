@@ -1,0 +1,55 @@
+plugins {
+  id "com.android.library"
+  id "kotlin-android"
+  id "kotlin-kapt"
+  id 'dagger.hilt.android.plugin'
+}
+
+android {
+  compileSdkVersion 30
+  buildToolsVersion "30.0.2"
+
+  defaultConfig {
+    minSdkVersion 26
+    targetSdkVersion 30
+    versionCode 1
+    versionName "1.0"
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles "consumer-rules.pro"
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+  kotlinOptions {
+    jvmTarget = '1.8'
+  }
+}
+
+dependencies {
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation "androidx.core:core-ktx:$coreKtx_version"
+
+//  implementation project("styles")
+//  implementation project("preferences")
+
+  implementation "androidx.appcompat:appcompat:$appCompat_version"
+  implementation "androidx.constraintlayout:constraintlayout:$constraintLayout_version"
+  implementation "androidx.cardview:cardview:$cardView_version"
+
+  // Play Core
+  api "com.google.android.play:core:$playCore_version"
+  api "com.google.android.play:core-ktx:$playCoreKtx_version"
+
+  // Hilt (Dagger)
+  implementation "com.google.dagger:hilt-android:$hilt_version"
+  kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+}
