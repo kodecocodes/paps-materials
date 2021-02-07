@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-  compileSdkVersion 30
+  compileSdkVersion compileSdk_version
   buildToolsVersion "30.0.2"
 
   defaultConfig {
-    minSdkVersion 26
-    targetSdkVersion 30
+    minSdkVersion minSdk_version
+    targetSdkVersion targetSdk_version
     versionCode 1
     versionName "1.0"
 
@@ -37,9 +37,6 @@ android {
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   implementation "androidx.core:core-ktx:$coreKtx_version"
-
-//  implementation project("styles")
-//  implementation project("preferences")
 
   implementation "androidx.appcompat:appcompat:$appCompat_version"
   implementation "androidx.constraintlayout:constraintlayout:$constraintLayout_version"

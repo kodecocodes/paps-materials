@@ -1,18 +1,15 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
 
 android {
-  compileSdkVersion 30
+  compileSdkVersion compileSdk_version
   buildToolsVersion = '30.0.2'
   defaultConfig {
     applicationId "com.raywenderlich.podplay3"
-    minSdkVersion 26
-    targetSdkVersion 30
+    minSdkVersion minSdk_version
+    targetSdkVersion targetSdk_version
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
