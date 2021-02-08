@@ -20,7 +20,8 @@
       android:layout_margin="@dimen/largeMargin"
       android:src="@drawable/sad_face"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintTop_toTopOf="parent"
+      android:contentDescription="@string/sad_face" />
 
     <ImageView
       android:id="@+id/progressBar"
@@ -31,7 +32,8 @@
       app:layout_constraintBottom_toBottomOf="@id/sadFace"
       app:layout_constraintEnd_toStartOf="@id/happyFace"
       app:layout_constraintStart_toEndOf="@id/sadFace"
-      app:layout_constraintTop_toTopOf="@id/sadFace" />
+      app:layout_constraintTop_toTopOf="@id/sadFace"
+      android:contentDescription="@string/progress_bar" />
 
     <ImageView
       android:id="@+id/happyFace"
@@ -40,17 +42,18 @@
       android:layout_margin="@dimen/largeMargin"
       android:src="@drawable/happy_face"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintTop_toTopOf="parent"
+      android:contentDescription="@string/happy_face" />
 
     <TextView
       android:id="@+id/reviewPromptTitle"
-      style="@style/Text.Headline"
+      style="@style/TextAppearance.AppCompat.Headline"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/defaultMargin"
       android:gravity="center_horizontal"
       android:text="@string/inAppReviewTitle"
-      android:textColor="@color/textColorHeadline"
+      android:textColor="@color/charcoal_black"
       android:textSize="@dimen/ratePromptTitleTextSize"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +61,6 @@
 
     <TextView
       android:id="@+id/reviewPromptText"
-      style="@style/Text.Regular"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/defaultMargin"
@@ -71,7 +73,7 @@
 
     <androidx.cardview.widget.CardView
       android:id="@+id/leaveReviewCard"
-      style="@style/Button.Colored"
+      android:backgroundTint="@color/dark_sea_green"
       android:layout_width="0dp"
       android:layout_height="@dimen/buttonSize"
       android:layout_marginHorizontal="@dimen/defaultMargin"
@@ -83,7 +85,7 @@
 
       <TextView
         android:id="@+id/leaveReview"
-        style="@style/Button.Text.Inverse"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/selectableItemBackground"
@@ -109,7 +111,6 @@
 
       <TextView
         android:id="@+id/reviewLater"
-        style="@style/Button.Text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/selectableItemBackground"
