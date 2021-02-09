@@ -1,2 +1,2 @@
-include ':app:inappreview'
+include ':inappreview'
 include ':app'

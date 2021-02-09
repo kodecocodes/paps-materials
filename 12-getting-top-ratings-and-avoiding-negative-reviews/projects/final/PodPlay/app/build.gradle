@@ -1,11 +1,11 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-android-extensions"
+apply plugin: "kotlin-kapt"
 
 android {
   compileSdkVersion 30
-  buildToolsVersion = '30.0.2'
+  buildToolsVersion = "30.0.2"
   defaultConfig {
     applicationId "com.raywenderlich.podplay3"
     minSdkVersion 26
@@ -17,7 +17,7 @@ android {
   buildTypes {
     release {
       // Enables code shrinking, obfuscation, and optimization for only
-      // your project's release build type.
+      // your project"s release build type.
       minifyEnabled true
 
       // Enables resource shrinking, which is performed by the
@@ -27,8 +27,8 @@ android {
       // Includes the default ProGuard rules files that are packaged with
       // the Android Gradle plugin.
       proguardFiles getDefaultProguardFile(
-          'proguard-android-optimize.txt'),
-          'proguard-rules.pro'
+          "proguard-android-optimize.txt"),
+          "proguard-rules.pro"
     }
   }
   compileOptions {
@@ -42,14 +42,13 @@ android {
 
 
 dependencies {
-  implementation fileTree(dir: 'libs', include: ['*.jar'])
-  implementation project("inappreview")
+  implementation fileTree(dir: "libs", include: ["*.jar"])
 
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-  implementation 'androidx.appcompat:appcompat:1.2.0'
-  implementation 'androidx.core:core-ktx:1.3.2'
-  implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-  implementation 'com.google.android.material:material:1.2.1'
+  implementation "androidx.appcompat:appcompat:1.2.0"
+  implementation "androidx.core:core-ktx:1.3.2"
+  implementation "androidx.constraintlayout:constraintlayout:2.0.4"
+  implementation "com.google.android.material:material:$material_version"
   implementation "androidx.recyclerview:recyclerview:1.1.0"
   implementation "androidx.media:media:1.2.1"
 
