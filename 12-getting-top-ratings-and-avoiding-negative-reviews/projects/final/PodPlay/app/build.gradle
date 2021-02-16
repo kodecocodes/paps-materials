@@ -5,6 +5,11 @@ apply plugin: "kotlin-kapt"
 
 android {
   compileSdkVersion 30
+
+  dataBinding {
+    enabled = true
+  }
+  
   buildToolsVersion = "30.0.2"
   defaultConfig {
     applicationId "com.raywenderlich.podplay3"
@@ -43,6 +48,7 @@ android {
 
 dependencies {
   implementation fileTree(dir: "libs", include: ["*.jar"])
+  implementation project(':inappreview')
 
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
   implementation "androidx.appcompat:appcompat:1.2.0"

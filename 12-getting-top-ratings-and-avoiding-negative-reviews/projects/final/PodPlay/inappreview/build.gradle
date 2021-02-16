@@ -19,6 +19,11 @@ android {
     consumerProguardFiles "consumer-rules.pro"
   }
 
+  buildFeatures {
+    viewBinding true
+  }
+
+
   buildTypes {
     release {
       minifyEnabled false
@@ -35,18 +40,20 @@ android {
 }
 
 dependencies {
+  // 1
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   implementation "androidx.core:core-ktx:$coreKtx_version"
 
+  //2 - UI
   implementation "androidx.appcompat:appcompat:$appCompat_version"
   implementation "androidx.constraintlayout:constraintlayout:$constraintLayout_version"
   implementation "androidx.cardview:cardview:$cardView_version"
 
-  // Play Core
+  // 3 - Play Core
   api "com.google.android.play:core:$playCore_version"
   api "com.google.android.play:core-ktx:$playCoreKtx_version"
 
-  // Hilt (Dagger)
+  // 4 - Hilt (Dagger)
   implementation "com.google.dagger:hilt-android:$hilt_version"
   kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 }
