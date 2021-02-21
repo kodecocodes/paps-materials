@@ -32,7 +32,7 @@ android {
       signingConfig signingConfigs.debug
     }
   }
-  flavorDimensions "version_type"
+  flavorDimensions "version_type", "store"
   productFlavors {
     free {
       dimension "version_type"
@@ -45,6 +45,27 @@ android {
       versionNameSuffix "-full"
     }
   }
+
+  productFlavors {
+    google {
+      dimension "store"
+      applicationIdSuffix ".google"
+      versionNameSuffix "-google"
+    }
+    amazon {
+      dimension "store"
+      applicationIdSuffix ".amazon"
+      versionNameSuffix "-amazon"
+    }
+  }
+
+  variantFilter { variant ->
+    def names = variant.flavors*.name
+    if (names.contains("free") && names.contains("amazon")) {
+      setIgnore(true)
+    }
+  }
+
   compileOptions {
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
