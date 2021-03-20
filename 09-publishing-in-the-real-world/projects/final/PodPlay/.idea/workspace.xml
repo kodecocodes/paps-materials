@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c1408d22-39f6-426c-b625-70d44b53b0b4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="PodPlay" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="PodPlay" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="PodPlay" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="android" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="ProjectId" id="1nDYN3JVdTzq7NSDkXJd2B6749o" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_30" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-02-25T02:59:50.738Z" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="PsdUISettings">
+    <option name="MODULE_TAB" value="Signing Configs" />
+    <option name="LAST_EDITED_SIGNING_CONFIG" value="amazon_release" />
+  </component>
+  <component name="RecentsManager">
+    <key name="android.template.2005565573">
+      <recent name="com.raywenderlich.podplay" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.PodPlay [sourceSets]">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="PodPlay.app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PodPlay [sourceSets]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="sourceSets" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.PodPlay [sourceSets]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c1408d22-39f6-426c-b625-70d44b53b0b4" name="Default Changelist" comment="" />
+      <created>1610926084391</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1610926084391</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="484" y="105" key="#Groovy" timestamp="1613873357189">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="484" y="105" key="#Groovy/0.0.1440.900@0.0.1440.900" timestamp="1613873357189" />
+    <state x="245" y="184" key="#PSD" timestamp="1614222031393">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="245" y="184" key="#PSD/0.0.1440.900@0.0.1440.900" timestamp="1614222031393" />
+    <state x="401" y="115" key="#app" timestamp="1614547250016">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="401" y="115" key="#app/0.0.1440.900@0.0.1440.900" timestamp="1614547250016" />
+    <state width="1398" height="407" key="GridCell.Tab.0.bottom" timestamp="1616112709813">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="407" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1616112709813" />
+    <state width="1398" height="407" key="GridCell.Tab.0.center" timestamp="1616112709812">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="407" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1616112709812" />
+    <state width="1398" height="407" key="GridCell.Tab.0.left" timestamp="1616112709811">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="407" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1616112709811" />
+    <state width="1398" height="407" key="GridCell.Tab.0.right" timestamp="1616112709812">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="407" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1616112709812" />
+    <state x="221" y="86" key="SettingsEditor" timestamp="1616107723454">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="-1219" y="35" key="SettingsEditor/-1440.-49.1440.875/0.25.1360.690@-1440.-49.1440.875" timestamp="1615338859309" />
+    <state x="-1219" y="35" key="SettingsEditor/-1440.-49.1440.875/0.25.1360.691@-1440.-49.1440.875" timestamp="1615338558456" />
+    <state x="221" y="86" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1616107723454" />
+    <state x="221" y="103" key="SettingsEditor/0.25.1440.818@0.25.1440.818" timestamp="1613878350638" />
+    <state x="-1055" y="102" width="670" height="724" key="search.everywhere.popup" timestamp="1615336332226">
+      <screen x="-1440" y="-49" width="1440" height="875" />
+    </state>
+    <state x="-1055" y="102" width="670" height="724" key="search.everywhere.popup/-1440.-49.1440.875/0.25.1360.691@-1440.-49.1440.875" timestamp="1615336332226" />
+    <state x="385" y="166" width="670" height="676" key="search.everywhere.popup/0.25.1440.817@0.25.1440.817" timestamp="1613874529527" />
+  </component>
+</project>
