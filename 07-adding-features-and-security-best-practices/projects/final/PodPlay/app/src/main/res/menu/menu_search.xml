@@ -14,6 +14,7 @@
     android:id="@+id/install_time_delivery_button"
     android:title="@string/install_time_delivery"
     android:icon="@android:drawable/ic_menu_preferences"
+    android:visible="false"
     app:showAsAction="ifRoom"/>
 
   <item android:id="@+id/download_on_demand_module_item"

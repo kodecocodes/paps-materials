@@ -34,6 +34,7 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -116,6 +117,8 @@ class PodcastActivity :
     inflater.inflate(R.menu.menu_search, menu)
 
     searchMenuItem = menu.findItem(R.id.search_item)
+    settingsMenuItem = menu.findItem(R.id.install_time_delivery_button)
+
     val searchView = searchMenuItem.actionView as SearchView
 
     searchMenuItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
@@ -143,10 +146,21 @@ class PodcastActivity :
       settingsMenuItem = menu.findItem(R.id.install_time_delivery_button)
     }
 
-    settingsMenuItem.setOnMenuItemClickListener {
-      val intent = Intent().setClassName(this,"com.raywenderlich.installtimedeliveryexample.SettingsActivity")
-      startActivity(intent)
-      true
+    try {
+      Class.forName(SETTINGS_CLASS_NAME)
+      isInstallTimeModuleAvailable = true
+      settingsMenuItem.isVisible = true
+    } catch (e: Exception) {
+      isInstallTimeModuleAvailable = false
+      Log.d(TAG_ACTIVITY, "Couldn't start SettingsActivity, the class doesn't exist")
+    }
+
+    if (isInstallTimeModuleAvailable) {
+      settingsMenuItem.setOnMenuItemClickListener {
+        val intent = Intent().setClassName(this, SETTINGS_CLASS_NAME)
+        startActivity(intent)
+        true
+      }
     }
 
     downloadMenuItem = menu.findItem(R.id.download_on_demand_module_item)
@@ -385,5 +399,7 @@ class PodcastActivity :
     private const val TAG_DETAILS_FRAGMENT = "DetailsFragment"
     private const val TAG_EPISODE_UPDATE_JOB = "com.raywenderlich.podplay.episodes"
     private const val TAG_PLAYER_FRAGMENT = "PlayerFragment"
+    private const val TAG_ACTIVITY = "PodcastActivity"
+    private const val SETTINGS_CLASS_NAME = "com.raywenderlich.installtimedeliveryexample.SettingsActivity"
   }
 }
