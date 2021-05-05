@@ -7,14 +7,6 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-  signingConfigs {
-    release {
-      storeFile file("release-key.keystore")
-      storePassword 'passwotd'
-      keyAlias 'alias'
-      keyPassword 'password'
-    }
-  }
   compileSdkVersion 30
   buildToolsVersion = '30.0.3'
   defaultConfig {
@@ -33,7 +25,6 @@ android {
     release {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-      signingConfig signingConfigs.release
     }
     qa {
       initWith debug
