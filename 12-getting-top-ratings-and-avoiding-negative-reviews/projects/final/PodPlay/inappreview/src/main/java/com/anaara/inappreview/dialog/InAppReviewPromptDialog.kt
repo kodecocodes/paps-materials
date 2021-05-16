@@ -44,6 +44,8 @@ import androidx.fragment.app.DialogFragment
 import com.anaara.inappreview.R
 import dagger.hilt.android.AndroidEntryPoint
 import com.anaara.inappreview.databinding.FragmentInAppReviewPromptBinding
+import com.anaara.inappreview.preferences.InAppReviewPreferences
+import javax.inject.Inject
 
 /**
  * Shows a dialog that asks the user if they want to review the app.
@@ -53,6 +55,9 @@ import com.anaara.inappreview.databinding.FragmentInAppReviewPromptBinding
  * */
 @AndroidEntryPoint
 class InAppReviewPromptDialog : DialogFragment() {
+
+  @Inject
+  lateinit var preferences: InAppReviewPreferences
 
   private var binding: FragmentInAppReviewPromptBinding? = null
 
