@@ -77,7 +77,7 @@ dependencies {
   // Location Services
   implementation "com.google.android.gms:play-services-location:18.0.0"
 
-  // Dagger
+  // Hilt (Dagger)
   // https://developer.android.com/training/dependency-injection/hilt-android
   implementation "com.google.dagger:hilt-android:$hilt_version"
   kapt "com.google.dagger:hilt-android-compiler:$hilt_version"

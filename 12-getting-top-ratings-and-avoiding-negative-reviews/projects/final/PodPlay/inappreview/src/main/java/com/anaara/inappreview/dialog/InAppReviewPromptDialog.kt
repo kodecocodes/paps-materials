@@ -34,6 +34,7 @@
 
 package com.anaara.inappreview.dialog
 
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -45,6 +46,7 @@ import com.anaara.inappreview.R
 import dagger.hilt.android.AndroidEntryPoint
 import com.anaara.inappreview.databinding.FragmentInAppReviewPromptBinding
 import com.anaara.inappreview.preferences.InAppReviewPreferences
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -84,14 +86,30 @@ class InAppReviewPromptDialog : DialogFragment() {
     binding.reviewLater.setOnClickListener { onRateLaterTapped() }
   }
 
-  private fun onLeaveReviewTapped() {
+  private fun  onLeaveReviewTapped() {
+    preferences.setUserRatedApp(true)
     // TODO
     dismissAllowingStateLoss()
   }
 
   private fun onRateLaterTapped() {
-    // TODO
+    preferences.setUserChosenRateLater(true)
+    preferences.setRateLater(getLaterTime())
     dismissAllowingStateLoss()
+  }
+
+  private fun getLaterTime(): Long {
+    return System.currentTimeMillis() + TimeUnit.DAYS.toMillis(14)
+
+  }
+
+  /**
+   * If the user cancels the dialog, we process that as if they chose to "Rate Later".
+   */
+  override fun onCancel(dialog: DialogInterface) {
+    preferences.setUserChosenRateLater(true)
+    preferences.setRateLater(getLaterTime())
+    super.onCancel(dialog)
   }
 
   /**
