@@ -153,8 +153,8 @@ class PodcastViewModel(application: Application) : AndroidViewModel
     }
   }
 
-  fun setInAppReviewView(podcastActivity: PodcastActivity) {
-    this.inAppReview = inAppReview
+  fun setInAppReviewView(inAppReviewView: InAppReviewView) {
+    this.inAppReview = inAppReviewView
   }
 
   data class PodcastViewData(
