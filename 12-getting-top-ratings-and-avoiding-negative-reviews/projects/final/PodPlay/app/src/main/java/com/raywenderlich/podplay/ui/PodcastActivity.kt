@@ -57,6 +57,8 @@ import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.anaara.inappreview.InAppReviewManager
+import com.anaara.inappreview.InAppReviewView
+import com.anaara.inappreview.dialog.InAppReviewPromptDialog
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
@@ -82,7 +84,8 @@ import javax.inject.Inject
 class PodcastActivity :
     AppCompatActivity(),
     PodcastListAdapterListener,
-    OnPodcastDetailsListener {
+    OnPodcastDetailsListener,
+    InAppReviewView {
 
   private val searchViewModel by viewModels<SearchViewModel>()
   private val podcastViewModel by viewModels<PodcastViewModel>()
@@ -108,8 +111,8 @@ class PodcastActivity :
     addBackStackListener()
     scheduleJobs()
     podcastViewModel.setInAppReviewView(this)
+    checkIfNeedsReviewPrompt()
   }
-
 
 
   override fun onSubscribe() {
@@ -138,6 +141,7 @@ class PodcastActivity :
       override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
         return true
       }
+
       override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
         showSubscribedPodcasts()
         return true
@@ -215,6 +219,7 @@ class PodcastActivity :
       permissions: Array<String>,
       grantResults: IntArray
   ) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     when (requestCode) {
       LOCATION_PERMISSION_REQUEST_CODE -> when {
         grantResults.isEmpty() ->
@@ -229,24 +234,24 @@ class PodcastActivity :
         else -> {
           // Permission denied.
           Snackbar.make(
-                  podcastDetailsContainer,
-                  R.string.permission_denied_explanation,
-                  Snackbar.LENGTH_LONG
+              podcastDetailsContainer,
+              R.string.permission_denied_explanation,
+              Snackbar.LENGTH_LONG
           )
-                  .setAction(R.string.settings) {
-                    // Build intent that displays the App settings screen.
-                    val intent = Intent()
-                    intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                    val uri = Uri.fromParts(
-                            "package",
-                            BuildConfig.APPLICATION_ID,
-                            null
-                    )
-                    intent.data = uri
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                  }
-                  .show()
+              .setAction(R.string.settings) {
+                // Build intent that displays the App settings screen.
+                val intent = Intent()
+                intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                val uri = Uri.fromParts(
+                    "package",
+                    BuildConfig.APPLICATION_ID,
+                    null
+                )
+                intent.data = uri
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+              }
+              .show()
           performSearch(searchTerm, DEFAULT_COUNTRY)
         }
       }
@@ -270,28 +275,28 @@ class PodcastActivity :
         // if possible, include a "cancel" or "no thanks" button that allows the user to
         // continue using your app without granting the permission.
         Snackbar.make(
-                podcastDetailsContainer,
-                R.string.permission_rationale,
-                Snackbar.LENGTH_LONG
+            podcastDetailsContainer,
+            R.string.permission_rationale,
+            Snackbar.LENGTH_LONG
         )
-                .setAction(R.string.ok) {
-                  // Request permission
-                  ActivityCompat.requestPermissions(
-                          this,
-                          arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
-                          LOCATION_PERMISSION_REQUEST_CODE
-                  )
-                }
-                .show()
+            .setAction(R.string.ok) {
+              // Request permission
+              ActivityCompat.requestPermissions(
+                  this,
+                  arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
+                  LOCATION_PERMISSION_REQUEST_CODE
+              )
+            }
+            .show()
       }
       else -> {
         // 3
         // Display the system permissions dialog when necessary
         Log.d("PodcastActivity", "Request location permission")
         ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
-                LOCATION_PERMISSION_REQUEST_CODE
+            this,
+            arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
+            LOCATION_PERMISSION_REQUEST_CODE
         )
       }
     }
@@ -305,23 +310,31 @@ class PodcastActivity :
     fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
     // 1
-    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+    if (ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ) != PackageManager.PERMISSION_GRANTED
+    ) {
       return
     }
     // 2
     fusedLocationClient.lastLocation
-            .addOnSuccessListener { location : Location? ->
-              // Got last known location. In some rare situations this can be null.
-              location?.let {
-                // 3
-                val geoCoder = Geocoder(this)
-                val addresses = geoCoder.getFromLocation(location.latitude,location.longitude, 1)
-                val searchCountry = addresses[0].countryCode
-                performSearch(searchTerm, searchCountry)
-              }
-            }.addOnFailureListener {
-                performSearch(searchTerm, DEFAULT_COUNTRY)
-            }
+        .addOnSuccessListener { location: Location? ->
+          // Got last known location. In some rare situations this can be null.
+          location?.let {
+            // 3
+            val geoCoder = Geocoder(this)
+            val addresses =
+                geoCoder.getFromLocation(location.latitude, location.longitude, 1)
+            val searchCountry = addresses[0].countryCode
+            performSearch(searchTerm, searchCountry)
+          }
+        }.addOnFailureListener {
+          performSearch(searchTerm, DEFAULT_COUNTRY)
+        }
   }
 
   private fun performSearch(searchTerm: String, searchCountry: String) {
@@ -429,8 +442,9 @@ class PodcastActivity :
   }
 
   private fun createPodcastDetailsFragment(): PodcastDetailsFragment {
-    var podcastDetailsFragment = supportFragmentManager.findFragmentByTag(TAG_DETAILS_FRAGMENT) as
-        PodcastDetailsFragment?
+    var podcastDetailsFragment =
+        supportFragmentManager.findFragmentByTag(TAG_DETAILS_FRAGMENT) as
+            PodcastDetailsFragment?
 
     if (podcastDetailsFragment == null) {
       podcastDetailsFragment = PodcastDetailsFragment.newInstance()
@@ -455,9 +469,26 @@ class PodcastActivity :
         .show()
   }
 
+  private fun checkIfNeedsReviewPrompt() {
+    val value = podcastListAdapter.itemCount
+    if (value > 3) {
+      showReviewFlow()
+    }
+  }
+
   companion object {
     private const val TAG_DETAILS_FRAGMENT = "DetailsFragment"
     private const val TAG_EPISODE_UPDATE_JOB = "com.raywenderlich.podplay.episodes"
     private const val TAG_PLAYER_FRAGMENT = "PlayerFragment"
+  }
+
+  /**
+   * Checks if the user is eligible for a review prompt, and shows a dialog if needed.
+   * */
+  override fun showReviewFlow() {
+    if (inAppReviewManager.isEligibleForReview()) {
+      val dialog = InAppReviewPromptDialog()
+      dialog.show(this.supportFragmentManager, null)
+    }
   }
 }

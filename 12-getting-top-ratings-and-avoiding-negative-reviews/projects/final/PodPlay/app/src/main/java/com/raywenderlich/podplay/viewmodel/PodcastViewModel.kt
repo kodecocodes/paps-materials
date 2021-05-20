@@ -34,9 +34,11 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import com.anaara.inappreview.InAppReviewView
 import com.raywenderlich.podplay.model.Episode
 import com.raywenderlich.podplay.model.Podcast
 import com.raywenderlich.podplay.repository.PodcastRepo
+import com.raywenderlich.podplay.ui.PodcastActivity
 import com.raywenderlich.podplay.util.DateUtils
 import com.raywenderlich.podplay.viewmodel.SearchViewModel.PodcastSummaryViewData
 import java.util.Date
@@ -50,6 +52,8 @@ class PodcastViewModel(application: Application) : AndroidViewModel
   private var livePodcastData: LiveData<List<PodcastSummaryViewData>>? = null
 
   private var activePodcast: Podcast? = null
+
+  private lateinit var inAppReview: InAppReviewView
 
   fun setActivePodcast(feedUrl: String, callback: (PodcastSummaryViewData?) -> Unit) {
     val repo = podcastRepo ?: return
@@ -149,12 +153,11 @@ class PodcastViewModel(application: Application) : AndroidViewModel
     }
   }
 
-    fun setInAppReviewView(podcastActivity: PodcastActivity) {
+  fun setInAppReviewView(podcastActivity: PodcastActivity) {
+    this.inAppReview = inAppReview
+  }
 
-    }
-
-
-    data class PodcastViewData(
+  data class PodcastViewData(
       var subscribed: Boolean = false,
       var feedTitle: String? = "",
       var feedUrl: String? = "",
