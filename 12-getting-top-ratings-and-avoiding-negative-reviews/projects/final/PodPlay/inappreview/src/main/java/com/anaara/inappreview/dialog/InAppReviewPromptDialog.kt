@@ -42,6 +42,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import com.anaara.inappreview.InAppReviewManager
 import com.anaara.inappreview.R
 import dagger.hilt.android.AndroidEntryPoint
 import com.anaara.inappreview.databinding.FragmentInAppReviewPromptBinding
@@ -60,6 +61,9 @@ class InAppReviewPromptDialog : DialogFragment() {
 
   @Inject
   lateinit var preferences: InAppReviewPreferences
+
+  @Inject
+  lateinit var inAppReviewManager: InAppReviewManager
 
   private var binding: FragmentInAppReviewPromptBinding? = null
 
@@ -88,7 +92,7 @@ class InAppReviewPromptDialog : DialogFragment() {
 
   private fun  onLeaveReviewTapped() {
     preferences.setUserRatedApp(true)
-    // TODO
+    inAppReviewManager.startReview(requireActivity())
     dismissAllowingStateLoss()
   }
 

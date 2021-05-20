@@ -149,7 +149,12 @@ class PodcastViewModel(application: Application) : AndroidViewModel
     }
   }
 
-  data class PodcastViewData(
+    fun setInAppReviewView(podcastActivity: PodcastActivity) {
+
+    }
+
+
+    data class PodcastViewData(
       var subscribed: Boolean = false,
       var feedTitle: String? = "",
       var feedUrl: String? = "",

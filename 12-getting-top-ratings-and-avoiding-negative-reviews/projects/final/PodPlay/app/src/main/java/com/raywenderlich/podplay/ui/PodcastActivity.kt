@@ -56,6 +56,7 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.anaara.inappreview.InAppReviewManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
@@ -76,6 +77,7 @@ import com.raywenderlich.podplay.viewmodel.SearchViewModel
 import com.raywenderlich.podplay.worker.EpisodeUpdateWorker
 import kotlinx.android.synthetic.main.activity_podcast.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 class PodcastActivity :
     AppCompatActivity(),
@@ -91,6 +93,9 @@ class PodcastActivity :
   private var searchTerm = ""
   private val DEFAULT_COUNTRY = "US" // search United State, by default
 
+  @Inject
+  lateinit var inAppReviewManager: InAppReviewManager
+
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -102,7 +107,10 @@ class PodcastActivity :
     handleIntent(intent)
     addBackStackListener()
     scheduleJobs()
+    podcastViewModel.setInAppReviewView(this)
   }
+
+
 
   override fun onSubscribe() {
     podcastViewModel.saveActivePodcast()
