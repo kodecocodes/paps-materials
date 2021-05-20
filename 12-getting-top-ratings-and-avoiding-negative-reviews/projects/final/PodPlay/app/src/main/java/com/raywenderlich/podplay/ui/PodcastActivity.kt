@@ -219,7 +219,6 @@ class PodcastActivity :
       permissions: Array<String>,
       grantResults: IntArray
   ) {
-    super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     when (requestCode) {
       LOCATION_PERMISSION_REQUEST_CODE -> when {
         grantResults.isEmpty() ->
@@ -465,7 +464,7 @@ class PodcastActivity :
     AlertDialog.Builder(this)
         .setMessage(message)
         .setPositiveButton(getString(R.string.ok_button), null)
-        .create()
+          .create()
         .show()
   }
 
