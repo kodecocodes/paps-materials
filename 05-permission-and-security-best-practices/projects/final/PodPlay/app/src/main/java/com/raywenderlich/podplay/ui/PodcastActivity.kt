@@ -207,6 +207,7 @@ class PodcastActivity :
       permissions: Array<String>,
       grantResults: IntArray
   ) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     when (requestCode) {
       LOCATION_PERMISSION_REQUEST_CODE -> when {
         grantResults.isEmpty() ->
