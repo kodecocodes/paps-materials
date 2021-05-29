@@ -99,7 +99,7 @@ dependencies {
   implementation "androidx.media:media:$media_version"
 
   implementation "androidx.fragment:fragment-ktx:$android_fragment_version"
-  implementation "androidx.activity:activity-ktx:$android_x_app_compat_version"
+  implementation "androidx.activity:activity-ktx:$android_x_activity_version"
   implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
   implementation "androidx.room:room-runtime:$room_version"
