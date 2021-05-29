@@ -34,6 +34,7 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -70,9 +71,9 @@ import kotlinx.android.synthetic.main.activity_podcast.progressBar
 import kotlinx.android.synthetic.main.activity_podcast.toolbar
 
 class PodcastActivity :
-    AppCompatActivity(),
-    PodcastListAdapterListener,
-    OnPodcastDetailsListener {
+        AppCompatActivity(),
+        PodcastListAdapterListener,
+        OnPodcastDetailsListener {
 
   private val searchViewModel by viewModels<SearchViewModel>()
   private val podcastViewModel by viewModels<PodcastViewModel>()
@@ -80,7 +81,7 @@ class PodcastActivity :
   private lateinit var searchMenuItem: MenuItem
   private lateinit var downloadMenuItem: MenuItem
   private lateinit var notesMenuItem: MenuItem
-  private var areNotesEnabled = true
+  private var areNotesEnabled = false
   private var isInstallTimeModuleAvailable = true
   private lateinit var settingsMenuItem: MenuItem
 
@@ -116,6 +117,8 @@ class PodcastActivity :
     inflater.inflate(R.menu.menu_search, menu)
 
     searchMenuItem = menu.findItem(R.id.search_item)
+    settingsMenuItem = menu.findItem(R.id.install_time_delivery_button)
+
     val searchView = searchMenuItem.actionView as SearchView
 
     searchMenuItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
@@ -143,10 +146,21 @@ class PodcastActivity :
       settingsMenuItem = menu.findItem(R.id.install_time_delivery_button)
     }
 
-    settingsMenuItem.setOnMenuItemClickListener {
-      val intent = Intent().setClassName(this,"com.raywenderlich.installtimedeliveryexample.SettingsActivity")
-      startActivity(intent)
-      true
+    try {
+      Class.forName(SETTINGS_CLASS_NAME)
+      isInstallTimeModuleAvailable = true
+      settingsMenuItem.isVisible = true
+    } catch (e: Exception) {
+      isInstallTimeModuleAvailable = false
+      Log.d(TAG_ACTIVITY, "Couldn't start SettingsActivity, the class doesn't exist")
+    }
+
+    if (isInstallTimeModuleAvailable) {
+      settingsMenuItem.setOnMenuItemClickListener {
+        val intent = Intent().setClassName(this, SETTINGS_CLASS_NAME)
+        startActivity(intent)
+        true
+      }
     }
 
     downloadMenuItem = menu.findItem(R.id.download_on_demand_module_item)
@@ -173,27 +187,27 @@ class PodcastActivity :
 
     //2
     val request = SplitInstallRequest
-        .newBuilder()
-        .addModule("onDemandDeliveryExample")
-        .build()
+            .newBuilder()
+            .addModule("onDemandDeliveryExample")
+            .build()
 
     //3
     splitInstallManager
-        .startInstall(request)
-        .addOnSuccessListener { sessionId ->
-          Toast.makeText(
-              applicationContext,
-              "Module installed successfully with sessionId $sessionId",
-              Toast.LENGTH_LONG
-          ).show()
-        }
-        .addOnFailureListener { exception ->
-          Toast.makeText(
-              applicationContext,
-              "Module not installed with exception $exception",
-              Toast.LENGTH_LONG
-          ).show()
-        }
+            .startInstall(request)
+            .addOnSuccessListener { sessionId ->
+              Toast.makeText(
+                      applicationContext,
+                      "Module installed successfully with sessionId $sessionId",
+                      Toast.LENGTH_LONG
+              ).show()
+            }
+            .addOnFailureListener { exception ->
+              Toast.makeText(
+                      applicationContext,
+                      "Module not installed with exception $exception",
+                      Toast.LENGTH_LONG
+              ).show()
+            }
 
     return true
   }
@@ -230,14 +244,14 @@ class PodcastActivity :
     }.build()
 
     val request = PeriodicWorkRequestBuilder<EpisodeUpdateWorker>(
-        1,
-        TimeUnit.HOURS
+            1,
+            TimeUnit.HOURS
     ).setConstraints(constraints).build()
 
     WorkManager.getInstance(this).enqueueUniquePeriodicWork(
-        TAG_EPISODE_UPDATE_JOB,
-        ExistingPeriodicWorkPolicy.REPLACE,
-        request
+            TAG_EPISODE_UPDATE_JOB,
+            ExistingPeriodicWorkPolicy.REPLACE,
+            request
     )
   }
 
@@ -287,12 +301,12 @@ class PodcastActivity :
 
   private fun setupPodcastListView() {
     podcastViewModel.getPodcasts()?.observe(
-        this,
-        {
-          if (it != null) {
-            showSubscribedPodcasts()
-          }
-        }
+            this,
+            {
+              if (it != null) {
+                showSubscribedPodcasts()
+              }
+            }
     )
   }
 
@@ -311,8 +325,8 @@ class PodcastActivity :
     podcastRecyclerView.layoutManager = layoutManager
 
     val dividerItemDecoration = DividerItemDecoration(
-        podcastRecyclerView.context,
-        layoutManager.orientation
+            podcastRecyclerView.context,
+            layoutManager.orientation
     )
     podcastRecyclerView.addItemDecoration(dividerItemDecoration)
 
@@ -324,8 +338,8 @@ class PodcastActivity :
     val podcastDetailsFragment = createPodcastDetailsFragment()
 
     supportFragmentManager.beginTransaction().add(
-        R.id.podcastDetailsContainer,
-        podcastDetailsFragment, TAG_DETAILS_FRAGMENT
+            R.id.podcastDetailsContainer,
+            podcastDetailsFragment, TAG_DETAILS_FRAGMENT
     ).addToBackStack("DetailsFragment").commit()
     podcastRecyclerView.visibility = View.INVISIBLE
     searchMenuItem.isVisible = false
@@ -335,9 +349,9 @@ class PodcastActivity :
     val episodePlayerFragment = createEpisodePlayerFragment()
 
     supportFragmentManager.beginTransaction().replace(
-        R.id.podcastDetailsContainer,
-        episodePlayerFragment,
-        TAG_PLAYER_FRAGMENT
+            R.id.podcastDetailsContainer,
+            episodePlayerFragment,
+            TAG_PLAYER_FRAGMENT
     ).addToBackStack("PlayerFragment").commit()
     podcastRecyclerView.visibility = View.INVISIBLE
     searchMenuItem.isVisible = false
@@ -346,7 +360,7 @@ class PodcastActivity :
   private fun createEpisodePlayerFragment(): EpisodePlayerFragment {
 
     var episodePlayerFragment = supportFragmentManager.findFragmentByTag(TAG_PLAYER_FRAGMENT) as
-        EpisodePlayerFragment?
+            EpisodePlayerFragment?
 
     if (episodePlayerFragment == null) {
       episodePlayerFragment = EpisodePlayerFragment.newInstance()
@@ -356,7 +370,7 @@ class PodcastActivity :
 
   private fun createPodcastDetailsFragment(): PodcastDetailsFragment {
     var podcastDetailsFragment = supportFragmentManager.findFragmentByTag(TAG_DETAILS_FRAGMENT) as
-        PodcastDetailsFragment?
+            PodcastDetailsFragment?
 
     if (podcastDetailsFragment == null) {
       podcastDetailsFragment = PodcastDetailsFragment.newInstance()
@@ -375,15 +389,17 @@ class PodcastActivity :
 
   private fun showError(message: String) {
     AlertDialog.Builder(this)
-        .setMessage(message)
-        .setPositiveButton(getString(R.string.ok_button), null)
-        .create()
-        .show()
+            .setMessage(message)
+            .setPositiveButton(getString(R.string.ok_button), null)
+            .create()
+            .show()
   }
 
   companion object {
     private const val TAG_DETAILS_FRAGMENT = "DetailsFragment"
     private const val TAG_EPISODE_UPDATE_JOB = "com.raywenderlich.podplay.episodes"
     private const val TAG_PLAYER_FRAGMENT = "PlayerFragment"
+    private const val TAG_ACTIVITY = "PodcastActivity"
+    private const val SETTINGS_CLASS_NAME = "com.raywenderlich.installtimedeliveryexample.SettingsActivity"
   }
 }
