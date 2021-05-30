@@ -20,6 +20,8 @@ buildscript {
     glide_version = '4.12.0'
     android_work_version = '2.5.0'
 
+    screengrab_version = '2.0.0'
+
     j_unit_version = '4.13.2'
     j_unit_android_extensions_version = '1.1.2'
     espresso_version = '3.3.0'
@@ -31,6 +33,7 @@ buildscript {
   repositories {
     google()
     mavenCentral()
+    jcenter()
   }
   dependencies {
       classpath "com.android.tools.build:gradle:$android_tools_version"
@@ -44,6 +47,7 @@ allprojects {
     repositories {
       google()
       mavenCentral()
+      jcenter()
     }
 }
 

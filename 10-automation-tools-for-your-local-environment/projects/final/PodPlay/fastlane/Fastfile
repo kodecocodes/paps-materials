@@ -21,6 +21,12 @@ platform :android do
     gradle(task: "test")
   end
 
+  desc "Screen Grab tests"
+  lane :screenshot_main_screen do
+    gradle(task: "clean assembleDebug assembleAndroidTest")
+    screengrab
+  end
+
   desc "Submit a new Beta Build to Crashlytics Beta"
   lane :beta do
     gradle(task: "clean assembleRelease")

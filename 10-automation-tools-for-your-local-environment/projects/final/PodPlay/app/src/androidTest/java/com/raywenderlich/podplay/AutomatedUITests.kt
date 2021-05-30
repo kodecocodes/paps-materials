@@ -19,6 +19,7 @@ class AutomatedUITests {
 
     @Test
     fun captureScreen() {
+        Thread.sleep(5000)
         Screengrab.screenshot("podcast_activity")
     }
 }

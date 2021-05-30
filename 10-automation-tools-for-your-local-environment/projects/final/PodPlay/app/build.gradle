@@ -47,12 +47,10 @@ android {
   productFlavors {
     free {
       dimension "version_type"
-      applicationIdSuffix ".free"
       versionNameSuffix "-free"
     }
     full {
       dimension "version_type"
-      applicationIdSuffix ".full"
       versionNameSuffix "-full"
     }
   }
@@ -60,12 +58,10 @@ android {
   productFlavors {
     google {
       dimension "store"
-      applicationIdSuffix ".google"
       versionNameSuffix "-google"
     }
     amazon {
       dimension "store"
-      applicationIdSuffix ".amazon"
       versionNameSuffix "-amazon"
       signingConfig signingConfigs.amazon_release
     }
@@ -119,7 +115,7 @@ dependencies {
   androidTestImplementation "androidx.test.ext:junit:$j_unit_android_extensions_version"
   androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
 
-  androidTestImplementation "tools.fastlane:screengrab:2.0.0"
+  androidTestImplementation "tools.fastlane:screengrab:$screengrab_version"
 
   implementation "com.google.android.play:core:$google_play_core_version"
   implementation "com.google.android.play:core-ktx:$google_play_core_ktx"

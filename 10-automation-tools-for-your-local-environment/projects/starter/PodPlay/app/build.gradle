@@ -39,7 +39,6 @@ android {
     }
     qa {
       initWith debug
-      applicationIdSuffix ".qaTesting"
       signingConfig signingConfigs.debug
     }
   }
@@ -47,12 +46,10 @@ android {
   productFlavors {
     free {
       dimension "version_type"
-      applicationIdSuffix ".free"
       versionNameSuffix "-free"
     }
     full {
       dimension "version_type"
-      applicationIdSuffix ".full"
       versionNameSuffix "-full"
     }
   }
@@ -60,12 +57,10 @@ android {
   productFlavors {
     google {
       dimension "store"
-      applicationIdSuffix ".google"
       versionNameSuffix "-google"
     }
     amazon {
       dimension "store"
-      applicationIdSuffix ".amazon"
       versionNameSuffix "-amazon"
       signingConfig signingConfigs.amazon_release
     }
