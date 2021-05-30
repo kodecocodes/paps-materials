@@ -44,4 +44,6 @@
   <uses-permission android:name="android.permission.WAKE_LOCK" />
   <uses-permission android:name="android.permission.INTERNET" />
 
+  <!-- TODO: add screengrab permissions -->
+
 </manifest>
