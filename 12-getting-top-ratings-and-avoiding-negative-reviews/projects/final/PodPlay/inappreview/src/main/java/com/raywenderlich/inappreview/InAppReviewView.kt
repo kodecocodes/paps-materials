@@ -1,4 +1,4 @@
-package com.anaara.inappreview
+package com.raywenderlich.inappreview
 
 interface InAppReviewView {
   /**

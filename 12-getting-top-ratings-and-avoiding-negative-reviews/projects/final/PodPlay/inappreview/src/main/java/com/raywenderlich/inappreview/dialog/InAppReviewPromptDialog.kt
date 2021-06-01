@@ -32,8 +32,9 @@
  *   THE SOFTWARE.
  */
 
-package com.anaara.inappreview.dialog
+package com.raywenderlich.inappreview.dialog
 
+import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -42,13 +43,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.anaara.inappreview.InAppReviewManager
-import com.anaara.inappreview.R
-import dagger.hilt.android.AndroidEntryPoint
-import com.anaara.inappreview.databinding.FragmentInAppReviewPromptBinding
-import com.anaara.inappreview.preferences.InAppReviewPreferences
+import com.google.android.play.core.review.ReviewManagerFactory
+import com.raywenderlich.inappreview.InAppReviewManager
+import com.raywenderlich.inappreview.InAppReviewManagerImpl
+import com.raywenderlich.inappreview.R
+import com.raywenderlich.inappreview.databinding.FragmentInAppReviewPromptBinding
+import com.raywenderlich.inappreview.preferences.InAppReviewPreferences
+import com.raywenderlich.inappreview.preferences.InAppReviewPreferencesImpl
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
 /**
  * Shows a dialog that asks the user if they want to review the app.
@@ -56,14 +58,10 @@ import javax.inject.Inject
  * This dialog is shown only if the user hasn't previously rated the app, hasn't asked to never
  * rate the app or if they asked to rate it later and enough time passed (a week).
  * */
-@AndroidEntryPoint
-class InAppReviewPromptDialog : DialogFragment() {
-
-  @Inject
-  lateinit var preferences: InAppReviewPreferences
-
-  @Inject
-  lateinit var inAppReviewManager: InAppReviewManager
+class InAppReviewPromptDialog(
+  private val preferences: InAppReviewPreferences,
+  private val inAppReviewManager: InAppReviewManager
+) : DialogFragment() {
 
   private var binding: FragmentInAppReviewPromptBinding? = null
 
@@ -132,8 +130,6 @@ class InAppReviewPromptDialog : DialogFragment() {
         resources.getDimensionPixelSize(R.dimen.ratePromptWidth),
         resources.getDimensionPixelSize(R.dimen.ratePromptHeight)
     )
-
-    binding?.progressBar?.setImageResource(R.drawable.progress_white)
   }
 
 }

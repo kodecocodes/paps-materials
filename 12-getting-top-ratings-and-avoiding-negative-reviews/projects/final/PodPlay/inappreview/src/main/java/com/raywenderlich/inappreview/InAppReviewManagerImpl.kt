@@ -1,19 +1,16 @@
-package com.anaara.inappreview
+package com.raywenderlich.inappreview
 
 import android.app.Activity
 import android.content.Context
 import android.util.Log
-import com.anaara.inappreview.preferences.InAppReviewPreferences
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.tasks.Task
-import dagger.hilt.android.qualifiers.ApplicationContext
+import com.raywenderlich.inappreview.preferences.InAppReviewPreferences
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 import kotlin.math.abs
 
-class InAppReviewManagerImpl @Inject constructor(
-    @ApplicationContext private val context: Context,
+class InAppReviewManagerImpl(
     private val reviewManager: ReviewManager,
     private val inAppReviewPreferences: InAppReviewPreferences
 ) : InAppReviewManager {

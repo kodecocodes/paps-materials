@@ -1,10 +1,9 @@
-package com.anaara.inappreview.preferences
+package com.raywenderlich.inappreview.preferences
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import javax.inject.Inject
 
-class InAppReviewPreferencesImpl @Inject constructor(
+class InAppReviewPreferencesImpl(
     private val sharedPreferences: SharedPreferences
 ) : InAppReviewPreferences {
 
@@ -30,8 +29,8 @@ class InAppReviewPreferencesImpl @Inject constructor(
         const val KEY_IN_APP_REVIEW_PREFERENCES = "inAppReviewPreferences"
 
         private const val KEY_HAS_RATED_APP = "hasRatedApp"
-        private const val KEY_CHOSEN_RATE_LATER = "hasRatedApp"
-        private const val KEY_RATE_LATER_TIME = "hasRatedApp"
+        private const val KEY_CHOSEN_RATE_LATER = "chosenRateLater"
+        private const val KEY_RATE_LATER_TIME = "rateLaterTime"
     }
 
 }

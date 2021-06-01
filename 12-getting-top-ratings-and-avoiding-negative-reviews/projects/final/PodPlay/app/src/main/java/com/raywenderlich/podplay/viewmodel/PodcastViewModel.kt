@@ -34,11 +34,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.anaara.inappreview.InAppReviewView
+import com.raywenderlich.inappreview.InAppReviewView
 import com.raywenderlich.podplay.model.Episode
 import com.raywenderlich.podplay.model.Podcast
 import com.raywenderlich.podplay.repository.PodcastRepo
-import com.raywenderlich.podplay.ui.PodcastActivity
 import com.raywenderlich.podplay.util.DateUtils
 import com.raywenderlich.podplay.viewmodel.SearchViewModel.PodcastSummaryViewData
 import java.util.Date

@@ -56,12 +56,16 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import com.anaara.inappreview.InAppReviewManager
-import com.anaara.inappreview.InAppReviewView
-import com.anaara.inappreview.dialog.InAppReviewPromptDialog
+import com.raywenderlich.inappreview.InAppReviewManager
+import com.raywenderlich.inappreview.InAppReviewView
+import com.raywenderlich.inappreview.dialog.InAppReviewPromptDialog
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.play.core.review.ReviewManagerFactory
+import com.raywenderlich.inappreview.InAppReviewManagerImpl
+import com.raywenderlich.inappreview.preferences.InAppReviewPreferences
+import com.raywenderlich.inappreview.preferences.InAppReviewPreferencesImpl
 import com.raywenderlich.podplay.BuildConfig
 import com.raywenderlich.podplay.adapter.PodcastListAdapter
 import com.raywenderlich.podplay.adapter.PodcastListAdapter.PodcastListAdapterListener
@@ -79,7 +83,6 @@ import com.raywenderlich.podplay.viewmodel.SearchViewModel
 import com.raywenderlich.podplay.worker.EpisodeUpdateWorker
 import kotlinx.android.synthetic.main.activity_podcast.*
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
 class PodcastActivity :
     AppCompatActivity(),
@@ -96,9 +99,8 @@ class PodcastActivity :
   private var searchTerm = ""
   private val DEFAULT_COUNTRY = "US" // search United State, by default
 
-  @Inject
-  lateinit var inAppReviewManager: InAppReviewManager
-
+  private lateinit var preferences: InAppReviewPreferences
+  private lateinit var inAppReviewManager: InAppReviewManager
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -106,6 +108,7 @@ class PodcastActivity :
     setupToolbar()
     setupViewModels()
     updateControls()
+    setupReviewManager()
     setupPodcastListView()
     handleIntent(intent)
     addBackStackListener()
@@ -113,7 +116,6 @@ class PodcastActivity :
     podcastViewModel.setInAppReviewView(this)
     checkIfNeedsReviewPrompt()
   }
-
 
   override fun onSubscribe() {
     podcastViewModel.saveActivePodcast()
@@ -211,6 +213,7 @@ class PodcastActivity :
     if (podcasts != null) {
       toolbar.title = getString(R.string.subscribed_podcasts)
       podcastListAdapter.setSearchData(podcasts)
+      checkIfNeedsReviewPrompt()
     }
   }
 
@@ -219,6 +222,7 @@ class PodcastActivity :
       permissions: Array<String>,
       grantResults: IntArray
   ) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     when (requestCode) {
       LOCATION_PERMISSION_REQUEST_CODE -> when {
         grantResults.isEmpty() ->
@@ -330,6 +334,8 @@ class PodcastActivity :
                 geoCoder.getFromLocation(location.latitude, location.longitude, 1)
             val searchCountry = addresses[0].countryCode
             performSearch(searchTerm, searchCountry)
+          } ?: kotlin.run {
+            performSearch(searchTerm, DEFAULT_COUNTRY)
           }
         }.addOnFailureListener {
           performSearch(searchTerm, DEFAULT_COUNTRY)
@@ -468,6 +474,14 @@ class PodcastActivity :
         .show()
   }
 
+  private fun setupReviewManager() {
+    val sharedPreferences = getSharedPreferences(InAppReviewPreferencesImpl.KEY_IN_APP_REVIEW_PREFERENCES, Context.MODE_PRIVATE)
+    preferences = InAppReviewPreferencesImpl(sharedPreferences)
+    inAppReviewManager = InAppReviewManagerImpl(
+      ReviewManagerFactory.create(this),
+      preferences
+    )
+  }
   private fun checkIfNeedsReviewPrompt() {
     val value = podcastListAdapter.itemCount
     if (value > 3) {
@@ -486,7 +500,7 @@ class PodcastActivity :
    * */
   override fun showReviewFlow() {
     if (inAppReviewManager.isEligibleForReview()) {
-      val dialog = InAppReviewPromptDialog()
+      val dialog = InAppReviewPromptDialog(preferences, inAppReviewManager)
       dialog.show(this.supportFragmentManager, null)
     }
   }

@@ -1,8 +1,6 @@
 plugins {
   id "com.android.library"
   id "kotlin-android"
-  id "kotlin-kapt"
-  id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -43,10 +41,6 @@ android {
   }
 }
 
-hilt {
-  enableExperimentalClasspathAggregation = true
-}
-
 dependencies {
   // 1
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -60,8 +54,4 @@ dependencies {
   // 3 - Play Core
   api "com.google.android.play:core:$playCore_version"
   api "com.google.android.play:core-ktx:$playCoreKtx_version"
-
-  // 4 - Hilt (Dagger)
-  implementation "com.google.dagger:hilt-android:$hilt_version"
-  kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 }

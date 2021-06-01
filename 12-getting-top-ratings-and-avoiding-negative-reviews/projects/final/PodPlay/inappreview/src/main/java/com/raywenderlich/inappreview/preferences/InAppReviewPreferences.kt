@@ -1,4 +1,4 @@
-package com.anaara.inappreview.preferences
+package com.raywenderlich.inappreview.preferences
 
 interface InAppReviewPreferences {
     fun hasUserRatedApp(): Boolean
