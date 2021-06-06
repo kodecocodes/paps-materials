@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "167913591674",
+    "project_id": "podplay-b9eb1",
+    "storage_bucket": "podplay-b9eb1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167913591674:android:6b252800fedbd5f7cbfcc3",
+        "android_client_info": {
+          "package_name": "com.raywenderlich.podplay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167913591674-m2non6ooibscu24km80if6slnvd0gddc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk5ao9ZJlI84NJGyrBpgQiCqV7hg1jlVs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167913591674-m2non6ooibscu24km80if6slnvd0gddc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
