@@ -30,7 +30,7 @@ Screen Grab tests
 ```
 fastlane android beta
 ```
-Submit a new Beta Build to Crashlytics Beta
+Submit a new Beta Build to Firebase App Distribution
 ### android deploy
 ```
 fastlane android deploy

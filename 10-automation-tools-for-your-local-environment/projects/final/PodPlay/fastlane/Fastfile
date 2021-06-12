@@ -27,13 +27,15 @@ platform :android do
     screengrab
   end
 
-  desc "Submit a new Beta Build to Crashlytics Beta"
+  desc "Submit a new Beta Build to Firebase App Distribution"
   lane :beta do
-    gradle(task: "clean assembleRelease")
-    crashlytics
-  
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
+    gradle(task: "clean assembleFreeGoogleDebug")
+
+    firebase_app_distribution(
+        app: "1:167913591674:android:6b252800fedbd5f7cbfcc3",
+        groups: "podplay-beta-testers",
+        release_notes: "First Podplay Beta!"
+    )
   end
 
   desc "Deploy a new version to the Google Play"
