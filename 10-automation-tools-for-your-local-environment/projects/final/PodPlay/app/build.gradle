@@ -21,7 +21,7 @@ android {
     applicationId "com.raywenderlich.podplay.evana"
     minSdkVersion 23
     targetSdkVersion 30
-    versionCode 1
+    versionCode 2
     versionName "1.0"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     buildConfigField "boolean", "IS_PRODUCTION", "false"
