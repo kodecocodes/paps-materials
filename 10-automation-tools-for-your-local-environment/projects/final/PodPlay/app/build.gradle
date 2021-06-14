@@ -8,23 +8,24 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
   signingConfigs {
-    amazon_release {
-      storeFile file("myreleasekey.keystore")
+    release {
+      storeFile file('/Users/evana/Desktop/podplay_release_key')
       storePassword "password"
-      keyAlias "MyReleaseKey"
+      keyAlias "key"
       keyPassword "password"
     }
   }
   compileSdkVersion 30
   buildToolsVersion = '30.0.3'
   defaultConfig {
-    applicationId "com.raywenderlich.podplay"
+    applicationId "com.raywenderlich.podplay.evana"
     minSdkVersion 23
     targetSdkVersion 30
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     buildConfigField "boolean", "IS_PRODUCTION", "false"
+    signingConfig signingConfigs.release
   }
 
   buildTypes {
@@ -63,7 +64,7 @@ android {
     amazon {
       dimension "store"
       versionNameSuffix "-amazon"
-      signingConfig signingConfigs.amazon_release
+      signingConfig signingConfigs.release
     }
   }
 
