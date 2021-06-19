@@ -3,11 +3,12 @@
 buildscript {
 
   ext {
-    kotlin_version = '1.5.10'
-    retrofit_version = '2.9.0'
-    lifecycle_version = '2.3.1'
-    coroutines_version = '1.4.3'
-    room_version = '2.3.0'
+    kotlin_version = "1.5.10"
+    retrofit_version = "2.9.0"
+    lifecycle_version = "2.3.1"
+    coroutines_version = "1.4.3"
+    room_version = "2.3.0"
+    security_version = "1.0.0"
   }
 
   repositories {

@@ -73,4 +73,7 @@ dependencies {
   // Location Services
   implementation "com.google.android.gms:play-services-location:18.0.0"
 
+  // Jetpack Security
+  implementation("androidx.security:security-crypto:$security_version")
+
 }
