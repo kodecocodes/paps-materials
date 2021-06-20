@@ -311,6 +311,8 @@ class PodcastActivity :
                 val addresses = geoCoder.getFromLocation(location.latitude,location.longitude, 1)
                 val searchCountry = addresses[0].countryCode
                 performSearch(searchTerm, searchCountry)
+              } ?: run {
+                performSearch(searchTerm, DEFAULT_COUNTRY)
               }
             }.addOnFailureListener {
                 performSearch(searchTerm, DEFAULT_COUNTRY)
