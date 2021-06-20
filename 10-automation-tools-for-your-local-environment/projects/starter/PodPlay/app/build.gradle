@@ -8,7 +8,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
   signingConfigs {
-    amazon_release {
+    release {
       storeFile file("myreleasekey.keystore")
       storePassword "password"
       keyAlias "MyReleaseKey"
@@ -25,6 +25,7 @@ android {
     versionName "1.0"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     buildConfigField "boolean", "IS_PRODUCTION", "false"
+    signingConfigs.release
   }
 
   buildTypes {
@@ -35,7 +36,7 @@ android {
     release {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
+      signingConfigs.release
     }
     qa {
       initWith debug
@@ -62,7 +63,6 @@ android {
     amazon {
       dimension "store"
       versionNameSuffix "-amazon"
-      signingConfig signingConfigs.amazon_release
     }
   }
 
