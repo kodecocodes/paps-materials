@@ -38,7 +38,7 @@
           android:layout_marginEnd="@dimen/promptProgressMargin"
           android:layout_weight="1"
           android:contentDescription="@string/progress_bar"
-          app:srcCompat="@drawable/progress_black" />
+          android:src="@drawable/progress_black" />
 
       <ImageView
           android:id="@+id/happyFace"

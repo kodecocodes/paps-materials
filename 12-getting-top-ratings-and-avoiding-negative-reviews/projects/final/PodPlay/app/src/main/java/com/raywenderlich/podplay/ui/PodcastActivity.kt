@@ -114,7 +114,6 @@ class PodcastActivity :
     addBackStackListener()
     scheduleJobs()
     podcastViewModel.setInAppReviewView(this)
-    checkIfNeedsReviewPrompt()
   }
 
   override fun onSubscribe() {
