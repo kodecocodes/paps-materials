@@ -34,13 +34,11 @@ class InAppReviewManagerImpl(
 
     override fun startReview(activity: Activity) {
         val myReviewInfo = reviewInfo
-        myReviewInfo.let {
-            if (myReviewInfo != null) {
-                reviewManager.launchReviewFlow(activity, myReviewInfo)
-                    .addOnCompleteListener { reviewFlow ->
-                        onReviewFlowLaunchCompleted(reviewFlow)
-                    }
-            }
+        if (myReviewInfo != null) {
+            reviewManager.launchReviewFlow(activity, myReviewInfo)
+                .addOnCompleteListener { reviewFlow ->
+                    onReviewFlowLaunchCompleted(reviewFlow)
+                }
         }
     }
 
