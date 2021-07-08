@@ -116,7 +116,8 @@ dependencies {
   androidTestImplementation "androidx.test.ext:junit:$j_unit_android_extensions_version"
   androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
 
-  androidTestImplementation "tools.fastlane:screengrab:$screengrab_version"
+  androidTestImplementation "tools.fastlane:screengrab:2.0.0"
+  androidTestImplementation 'com.jraska:falcon:2.2.0'
 
   implementation "com.google.android.play:core:$google_play_core_version"
   implementation "com.google.android.play:core-ktx:$google_play_core_ktx"
