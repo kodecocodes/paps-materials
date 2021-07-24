@@ -63,8 +63,6 @@ class NoteDialogFragment : DialogFragment() {
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
     val note = arguments?.getSerializable(KEY_NOTE) as? Note ?: Note()
 
-    val context = requireActivity()
-
     val builder = AlertDialog.Builder(requireActivity())
     notePopupBinding = NotePopupBinding.inflate(LayoutInflater.from(context))
 
@@ -99,4 +97,5 @@ class NoteDialogFragment : DialogFragment() {
 
     return builder.create()
   }
+
 }

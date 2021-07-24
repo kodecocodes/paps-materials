@@ -49,19 +49,12 @@ private const val PRIORITY_THREE = "3"
 class MainActivity : AppCompatActivity(), NoteDialogFragment.NoticeNoteDialogListener {
 
   private lateinit var binding: ActivityMainBinding
-
   private val notePrefs: NotePrefs by lazy {
     NotePrefs(PreferenceManager.getDefaultSharedPreferences(this))
   }
 
-  private val noteAdapter: NoteAdapter by lazy {
-    NoteAdapter(this,
-        priorities,
-        notePrefs.getNoteSortOrder(),
-        ::showEditNoteDialog
-    )
-  }
-  private val priorities by lazy { notePrefs.getNotePriorityFilters().toMutableSet() }
+  private val noteAdapter: NoteAdapter by lazy { NoteAdapter(this, priorities, FILENAME_ASC, ::showEditNoteDialog) }
+  private val priorities: MutableSet<String> = mutableSetOf()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -222,11 +215,11 @@ class MainActivity : AppCompatActivity(), NoteDialogFragment.NoticeNoteDialogLis
 
   private fun updateNoteSortOrder(sortOrder: NoteSortOrder) {
     noteAdapter.updateNotesFilters(order = sortOrder)
-    notePrefs.saveNoteSortOrder(sortOrder)
+    // TODO: Save the sort order to prefs
   }
 
   private fun updateNotePrioritiesFilter(priorities: Set<String>) {
     noteAdapter.updateNotesFilters(priorities = priorities)
-    notePrefs.saveNotePriorityFilters(priorities)
+    // TODO: Save the priorities to prefs
   }
 }

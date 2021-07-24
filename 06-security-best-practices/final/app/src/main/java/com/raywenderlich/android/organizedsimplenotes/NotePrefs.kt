@@ -35,31 +35,24 @@ private const val KEY_APP_BACKGROUND_COLOR = "key_app_background_color"
 private const val DEFAULT_COLOR = "Green"
 private const val DEFAULT_SORT_ORDER = "FILENAME_ASC"
 private const val DEFAULT_PRIORITY_FILTER = "1"
-private const val KEY_NOTE_SORT_PREFERENCE = "note_sort_preference"
-private const val KEY_NOTE_PRIORITY_SET = "note_priority_set"
+
+//TODO: Add some constants for priorities and sort order
 
 class NotePrefs(private val sharedPrefs: SharedPreferences) {
 
   fun saveNoteSortOrder(noteSortOrder: NoteSortOrder) {
-    sharedPrefs.edit()
-        .putString(KEY_NOTE_SORT_PREFERENCE, noteSortOrder.name)
-        .apply()
+    //TODO: Add the code to save the sort order to sharedprefs
   }
 
-  fun getNoteSortOrder() = NoteSortOrder.valueOf(
-      sharedPrefs.getString(KEY_NOTE_SORT_PREFERENCE, DEFAULT_SORT_ORDER)
-          ?: DEFAULT_SORT_ORDER
-  )
+  //TODO: Add the code to read the sort order to sharedprefs instead
+  fun getNoteSortOrder() = NoteSortOrder.FILENAME_ASC
 
   fun saveNotePriorityFilters(priorities: Set<String>) {
-    sharedPrefs.edit()
-        .putStringSet(KEY_NOTE_PRIORITY_SET, priorities)
-        .apply()
+    //TODO: Add the code to save the priorities to sharedprefs
   }
 
-  fun getNotePriorityFilters(): Set<String> =
-      sharedPrefs.getStringSet(KEY_NOTE_PRIORITY_SET, setOf(DEFAULT_PRIORITY_FILTER))
-          ?: setOf(DEFAULT_PRIORITY_FILTER)
+  fun getNotePriorityFilters(): Set<String> = setOf()
+  //TODO: Add the code to read the priorities to sharedprefs instead
 
   fun saveNoteBackgroundColor(noteBackgroundColor: String) {
     sharedPrefs.edit()
