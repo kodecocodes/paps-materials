@@ -1,0 +1,18 @@
+# 1
+android_home('$PATH')
+
+# 2
+use_adb_root(true)
+
+# 3
+app_package_name('com.raywenderlich.podplay')
+
+# 4
+app_apk_path('app/build/outputs/apk/freeGoogle/debug/app-free-google-debug.apk')
+tests_apk_path('app/build/outputs/apk/androidTest/freeGoogle/debug/app-free-google-debug-androidTest.apk')
+
+# 5
+locales(['en-US'])
+
+# 6
+clear_previous_screenshots(true)
