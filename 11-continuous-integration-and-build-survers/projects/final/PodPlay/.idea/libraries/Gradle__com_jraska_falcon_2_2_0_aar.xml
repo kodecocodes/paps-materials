@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.jraska:falcon:2.2.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1ab54a5c0d740eafcd7f6f756ef204c6/jetified-falcon-2.2.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1ab54a5c0d740eafcd7f6f756ef204c6/jetified-falcon-2.2.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1ab54a5c0d740eafcd7f6f756ef204c6/jetified-falcon-2.2.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jraska/falcon/2.2.0/9f27d9297dfd6cc01a4a6dfc973ba3e928443c9c/falcon-2.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
