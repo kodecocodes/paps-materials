@@ -37,6 +37,7 @@ import android.view.MenuItem
 import android.view.Window
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.raywenderlich.android.organizedsimplenotes.NoteSortOrder.*
@@ -48,6 +49,7 @@ private const val PRIORITY_THREE = "3"
 
 class MainActivity : AppCompatActivity(), NoteDialogFragment.NoticeNoteDialogListener {
 
+  private val model: MainActivityViewModel by viewModels()
   private lateinit var binding: ActivityMainBinding
   private val notePrefs: NotePrefs by lazy {
     NotePrefs(PreferenceManager.getDefaultSharedPreferences(this))
@@ -105,6 +107,10 @@ class MainActivity : AppCompatActivity(), NoteDialogFragment.NoticeNoteDialogLis
         showNoteBackgroundColorDialog()
         true
       }
+      R.id.set_encryption_key -> {
+        showSetEncryptionKeyDialog()
+        true
+      }
       R.id.sort_by_date_last_modified_asc -> {
         item.isChecked = true
         updateNoteSortOrder(DATE_LAST_MOD_ASC)
@@ -154,6 +160,10 @@ class MainActivity : AppCompatActivity(), NoteDialogFragment.NoticeNoteDialogLis
       }
       else -> return super.onOptionsItemSelected(item)
     }
+  }
+
+  private fun showSetEncryptionKeyDialog() {
+    TODO("Not yet implemented")
   }
 
   private fun togglePriorityState(priority: String, isActive: Boolean) {
