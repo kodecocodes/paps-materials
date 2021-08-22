@@ -31,7 +31,7 @@ package com.raywenderlich.android.organizedsimplenotes
 
 import android.app.Dialog
 import android.os.Bundle
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.Window
@@ -49,12 +49,11 @@ private const val PRIORITY_THREE = "3"
 
 class MainActivity : AppCompatActivity(), NoteDialogFragment.NoticeNoteDialogListener {
 
-  private val model: MainActivityViewModel by viewModels()
   private lateinit var binding: ActivityMainBinding
   private val notePrefs: NotePrefs by lazy {
     NotePrefs(PreferenceManager.getDefaultSharedPreferences(this))
   }
-
+  private val model: MainActivityViewModel by viewModels()
   private val noteAdapter: NoteAdapter by lazy { NoteAdapter(this, priorities, FILENAME_ASC, ::showEditNoteDialog) }
   private val priorities: MutableSet<String> = mutableSetOf()
 
