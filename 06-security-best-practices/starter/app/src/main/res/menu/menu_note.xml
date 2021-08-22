@@ -36,40 +36,44 @@
       android:id="@+id/change_note_background_color"
       android:title="@string/change_note_background_color"
       app:showAsAction="never" />
+  <item android:id="@+id/set_encryption_key"
+    android:title="@string/set_encryption_key"
+    app:showAsAction="never" />
+
   <item android:id="@+id/filter_note_by_priority"
-        android:title="Filter Note By Priority"
+        android:title="@string/filter_note_by_priority"
         android:icon="@drawable/ic_filter"
         app:showAsAction="ifRoom">
     <menu>
     <group android:checkableBehavior="all">
       <item android:id="@+id/priority_1"
-            android:title="Priority 1" />
+            android:title="@string/priority_1" />
       <item android:id="@+id/priority_2"
-            android:title="Priority 2" />
+            android:title="@string/priority_2" />
       <item android:id="@+id/priority_3"
-            android:title="Priority 3" />
+            android:title="@string/priority_3" />
 
     </group>
     </menu>
   </item>
   <item android:id="@+id/sort_notes_by"
-        android:title="Sort Notes By..."
+        android:title="@string/sort_notes_by"
         android:icon="@drawable/ic_sort"
         app:showAsAction="ifRoom">
     <menu>
       <group android:checkableBehavior="single">
         <item android:id="@+id/sort_by_date_last_modified_asc"
-              android:title="Date Modified Ascending"/>
+              android:title="@string/date_modified_ascending"/>
         <item android:id="@+id/sort_by_date_last_modified_desc"
-              android:title="Date Modified Descending"/>
+              android:title="@string/date_modified_descending"/>
         <item android:id="@+id/sort_by_filename_asc"
-              android:title="Filename Ascending" />
+              android:title="@string/filename_ascending" />
         <item android:id="@+id/sort_by_filename_desc"
-              android:title="Filename Descending" />
+              android:title="@string/filename_descending" />
         <item android:id="@+id/sort_by_priority_asc"
-              android:title="Priority Ascending" />
+              android:title="@string/priority_ascending" />
         <item android:id="@+id/sort_by_priority_desc"
-              android:title="Priority Descending" />
+              android:title="@string/priority_descending" />
       </group>
     </menu>
 
