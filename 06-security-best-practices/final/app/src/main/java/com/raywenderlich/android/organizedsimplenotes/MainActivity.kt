@@ -31,14 +31,20 @@ package com.raywenderlich.android.organizedsimplenotes
 
 import android.app.Dialog
 import android.os.Bundle
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.Window
+import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.activity.viewModels
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.raywenderlich.android.organizedsimplenotes.NoteSortOrder.*
 import com.raywenderlich.android.organizedsimplenotes.databinding.ActivityMainBinding
 
@@ -52,7 +58,7 @@ class MainActivity : AppCompatActivity(), NoteDialogFragment.NoticeNoteDialogLis
   private val notePrefs: NotePrefs by lazy {
     NotePrefs(PreferenceManager.getDefaultSharedPreferences(this))
   }
-
+  private val model: MainActivityViewModel by viewModels()
   private val noteAdapter: NoteAdapter by lazy { NoteAdapter(this, priorities, FILENAME_ASC, ::showEditNoteDialog) }
   private val priorities: MutableSet<String> = mutableSetOf()
 
@@ -103,6 +109,10 @@ class MainActivity : AppCompatActivity(), NoteDialogFragment.NoticeNoteDialogLis
       // Background color preference selected
       R.id.change_note_background_color -> {
         showNoteBackgroundColorDialog()
+        true
+      }
+      R.id.set_encryption_key -> {
+        editEncryptionKey()
         true
       }
       R.id.sort_by_date_last_modified_asc -> {
@@ -156,13 +166,20 @@ class MainActivity : AppCompatActivity(), NoteDialogFragment.NoticeNoteDialogLis
     }
   }
 
-  private fun togglePriorityState(priority: String, isActive: Boolean) {
-    if (isActive) {
-      priorities.add(priority)
-    } else {
-      priorities.remove(priority)
-    }
-    updateNotePrioritiesFilter(priorities)
+  private fun editEncryptionKey() {
+    if (model.getEncryptionKey() == null) showSetEncryptionKeyDialog() else showResetEncryptionKeyDialog()
+  }
+
+  private fun showSetEncryptionKeyDialog() {
+    buildEncryptionKeyDialog(title = R.string.dialog_set_encryption_key_title) {
+      model.setEncryptionKey(model.getEncryptionKey(), it)
+    }.show()
+  }
+
+  private fun showResetEncryptionKeyDialog() {
+    buildResetEncryptionKeyDialog { current, new ->
+      model.setEncryptionKey(current, new)
+    }.show()
   }
 
   private fun showNoteBackgroundColorDialog() {
@@ -191,6 +208,53 @@ class MainActivity : AppCompatActivity(), NoteDialogFragment.NoticeNoteDialogLis
       }
     }
     dialog.show()
+  }
+
+  private fun buildEncryptionKeyDialog(
+    @StringRes title: Int = R.string.dialog_encryption_key_title,
+    onPositiveClicked: (value: String) -> Unit
+  ): AlertDialog {
+    val view = View.inflate(this, R.layout.alert_dialog_encryption_key_layout, null)
+    val editTextView: EditText = view.findViewById(R.id.encryption_key_input_edit_text)
+
+    return MaterialAlertDialogBuilder(this)
+      .setTitle(title)
+      .setView(view)
+      .setPositiveButton(R.string.dialog_encryption_key_positive_button) { _, _ ->
+        onPositiveClicked(editTextView.text.toString())
+      }
+      .setNegativeButton(R.string.dialog_encryption_key_negative_button) { _, _ -> }
+      .create()
+  }
+
+  private fun buildResetEncryptionKeyDialog(
+    @StringRes title: Int = R.string.dialog_new_encryption_key_title,
+    onPositiveClicked: (current: String, new: String) -> Unit
+  ): AlertDialog {
+    val view = View.inflate(this, R.layout.alert_dialog_reset_encryption_key_layout, null)
+    val logKeyEditTextView: EditText = view.findViewById(R.id.encryption_key_input_edit_text)
+    val newLogKeyEditTextView: EditText = view.findViewById(R.id.new_encryption_key_input_edit_text)
+
+    return MaterialAlertDialogBuilder(this)
+      .setTitle(title)
+      .setView(view)
+      .setPositiveButton(R.string.dialog_new_encryption_key_positive_button) { _, _ ->
+        onPositiveClicked(
+          logKeyEditTextView.text.toString(),
+          newLogKeyEditTextView.text.toString()
+        )
+      }
+      .setNegativeButton(R.string.dialog_new_encryption_key_negative_button) { _, _ -> }
+      .create()
+  }
+
+  private fun togglePriorityState(priority: String, isActive: Boolean) {
+    if (isActive) {
+      priorities.add(priority)
+    } else {
+      priorities.remove(priority)
+    }
+    updateNotePrioritiesFilter(priorities)
   }
 
   private fun changeNotesBackgroundColor() = window.decorView.setBackgroundResource(getCurrentBackgroundColorInt())

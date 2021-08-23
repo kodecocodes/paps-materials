@@ -39,7 +39,7 @@
   <string name="notes_hint">Enter Notes Here</string>
   <string name="title_activity_main">Organized Simple Note</string>
   <string name="note_text_hint">Note Text</string>
-  <string name="fake_date">01-01-01 01:01:01</string>
+  <string name="fake_date">01–01–01 01:01:01</string>
   <string name="filename_hint">Filename</string>
   <string name="lines_text_1">1</string>
   <string name="hint_note_text">Note Text</string>
@@ -48,8 +48,31 @@
   <string name="purple">Purple</string>
   <string name="edit_note_title">Edit Note</string>
   <string name="add_note_title">Add Note</string>
+  <string name="set_encryption_key">Set Encryption Key</string>
+  <string name="filter_note_by_priority">Filter Note By Priority</string>
+  <string name="priority_1">Priority 1</string>
+  <string name="priority_2">Priority 2</string>
+  <string name="priority_3">Priority 3</string>
+  <string name="sort_notes_by">Sort Notes By…</string>
+  <string name="date_modified_ascending">Date Modified Ascending</string>
+  <string name="date_modified_descending">Date Modified Descending</string>
+  <string name="filename_ascending">Filename Ascending</string>
+  <string name="filename_descending">Filename Descending</string>
+  <string name="priority_ascending">Priority Ascending</string>
+  <string name="priority_descending">Priority Descending</string>
+  <string name="error_current_encryption_key_incorrect">Incorrect current encryption key</string>
+  <string name="dialog_encryption_key_hint">Encryption key</string>
+  <string name="dialog_encryption_key_title">Enter encryption key</string>
+  <string name="dialog_encryption_key_positive_button">Done</string>
+  <string name="dialog_encryption_key_negative_button">Cancel</string>
 
-
+  <string name="dialog_new_encryption_key_current_encryption_key_hint">Current encryption key</string>
+  <string name="dialog_new_encryption_key_new_encryption_key_hint">New encryption key</string>
+  <string name="dialog_new_encryption_key_positive_button">Done</string>
+  <string name="dialog_new_encryption_key_negative_button">Cancel</string>
+  <string name="dialog_new_encryption_key_title">Set a new encryption key</string>
+  <string name="dialog_set_encryption_key_title">Set encryption Key</string>
+  <string name="dialog_set_encryption_key_negative_button">Cancel</string>
   <string-array name="prioritiesList">
     <item>(priority)</item>
     <item>1</item>

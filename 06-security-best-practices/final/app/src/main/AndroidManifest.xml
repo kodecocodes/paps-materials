@@ -43,7 +43,8 @@
       android:theme="@style/AppTheme">
 
     <!-- Splash Activity -->
-    <activity android:name="com.raywenderlich.android.organizedsimplenotes.SplashActivity">
+    <activity android:name="com.raywenderlich.android.organizedsimplenotes.SplashActivity"
+      >
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
