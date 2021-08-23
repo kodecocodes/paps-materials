@@ -17,13 +17,13 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
   private val context by lazy { getApplication<Application>().applicationContext }
 
-  fun getLogKey(): String? {
+  fun getEncryptionKey(): String? {
     // TODO
     return null
   }
 
-  fun setLogKey(current: String?, new: String?) {
-    if (current != getLogKey()) {
+  fun setEncryptionKey(current: String?, new: String?) {
+    if (current != getEncryptionKey()) {
       _snackbar.value = context.getString(R.string.error_current_encryption_key_incorrect)
       return
     }
