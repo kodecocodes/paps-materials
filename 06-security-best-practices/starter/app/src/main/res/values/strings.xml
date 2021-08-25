@@ -73,6 +73,10 @@
   <string name="dialog_new_encryption_key_title">Set a new encryption key</string>
   <string name="dialog_set_encryption_key_title">Set encryption Key</string>
   <string name="dialog_set_encryption_key_negative_button">Cancel</string>
+
+  <string name="message_encryption_key_set">Log key set</string>
+  <string name="message_encryption_key_cleared">Log key cleared</string>
+
   <string-array name="prioritiesList">
     <item>(priority)</item>
     <item>1</item>
