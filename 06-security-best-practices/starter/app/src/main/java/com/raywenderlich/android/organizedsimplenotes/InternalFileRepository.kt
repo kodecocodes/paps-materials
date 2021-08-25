@@ -31,12 +31,14 @@
 package com.raywenderlich.android.organizedsimplenotes
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
 import java.io.File
 import java.util.*
 
 class InternalFileRepository(private var context: Context) : NoteRepository {
 
   private val allNotes by lazy { getNotes() }
+  private val _snackbar = MutableLiveData<String?>()
 
   override fun editNote(note: Note) {
     note.noteText = note.toString()

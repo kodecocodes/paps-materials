@@ -31,12 +31,18 @@
 package com.raywenderlich.android.organizedsimplenotes
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
+import androidx.security.crypto.EncryptedFile
+import androidx.security.crypto.MasterKeys
+import com.raywenderlich.android.organizedsimplenotes.utils.urlEncode
 import java.io.File
+import java.lang.Exception
 import java.util.*
 
 class InternalFileRepository(private var context: Context) : NoteRepository {
 
   private val allNotes by lazy { getNotes() }
+  private val _snackbar = MutableLiveData<String?>()
 
   override fun editNote(note: Note) {
     note.noteText = note.toString()
@@ -104,4 +110,48 @@ class InternalFileRepository(private var context: Context) : NoteRepository {
   private fun noteFile(fileName: String): File = File(noteDirectory(), fileName)
 
   private fun noteDirectory(): String = context.filesDir.absolutePath
+
+  // Encrypted Files
+  private fun getEncryptedEntry(name: String): EncryptedFile {
+    val keyGenParameterSpec = MasterKeys.AES256_GCM_SPEC
+    val masterKeyAlias = MasterKeys.getOrCreate(keyGenParameterSpec)
+    val fileEncryptionScheme = EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
+
+    return EncryptedFile.Builder(
+      File(context.filesDir, name.urlEncode()),
+      context,
+      masterKeyAlias,
+      fileEncryptionScheme
+    ).build()
+  }
+
+  fun encryptEntry(fileName: String, body:String, existingName: String) {
+    if (fileName.isBlank()) return
+
+    try {
+      deleteNote(existingName)
+      val encryptedFile = getEncryptedEntry(fileName)
+      encryptedFile.openFileOutput().use { output ->
+        output.write(body.toByteArray())
+      }
+    } catch(e: Exception) {
+      e.printStackTrace()
+      _snackbar.value = context.getString(R.string.error_unable_to_save_file)
+    }
+  }
+
+  fun decryptEntry(fileName: String): String {
+    val encryptedFile = getEncryptedEntry(fileName)
+    try {
+      encryptedFile.openFileInput().use { input ->
+        return String(input.readBytes(), Charsets.UTF_8)
+      }
+    } catch(e: Exception) {
+      e.printStackTrace()
+      _snackbar.value = context.getString(R.string.error_unable_to_decrypt)
+      return ""
+    }
+  }
+
+
 }

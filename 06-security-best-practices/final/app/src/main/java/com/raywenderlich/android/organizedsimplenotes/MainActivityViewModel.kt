@@ -38,7 +38,6 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
       ENCRYPTED_PREFS_ENCRYPTION_KEY,
       null
     )
-     null
   }
 
   fun setEncryptionKey(current: String?, new: String?) {

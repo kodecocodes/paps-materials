@@ -76,6 +76,8 @@
 
   <string name="message_encryption_key_set">Log key set</string>
   <string name="message_encryption_key_cleared">Log key cleared</string>
+  <string name="error_unable_to_decrypt">Unable to decrypt file</string>
+  <string name="error_unable_to_save_file">Unable to encrypt and save file</string>
 
   <string-array name="prioritiesList">
     <item>(priority)</item>
