@@ -33,12 +33,18 @@ jobs:
           echo test, and deploy your project.
 
   test:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps: #1
       - name: Run a log message #2
         run: echo This is my job for running tests! #3
 
       - uses: actions/checkout@v2
 
+      - name: set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
       - name: Unit tests
         run: ./gradlew test
+
