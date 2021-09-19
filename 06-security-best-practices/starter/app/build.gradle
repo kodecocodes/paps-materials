@@ -72,7 +72,6 @@ dependencies {
   // Support Libraries
   implementation ("androidx.appcompat:appcompat:$appcompat_version")
   implementation ("androidx.constraintlayout:constraintlayout:$arch_version")
-  implementation ("com.google.android.material:material:1.5.0-alpha03")
   implementation ("androidx.core:core-ktx:$ktx_version")
   implementation ("com.google.android.material:material:$material_version")
   implementation ("androidx.navigation:navigation-fragment-ktx:$navigation_version")
