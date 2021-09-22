@@ -53,10 +53,15 @@ class InternalFileRepository(private var context: Context) : NoteRepository {
 
   override fun addNote(note: Note): Boolean {
     val text = note.toString()
-
     if (!noteFile(note.fileName).exists()) {
-      context.openFileOutput(note.fileName, Context.MODE_PRIVATE).use { output ->
-        output.write(text.toByteArray())
+      try {
+        val encryptedFile = getEncryptedEntry(note.fileName)
+        encryptedFile.openFileOutput().use { output ->
+          output.write(text.toByteArray())
+        }
+      } catch (e: Exception) {
+        e.printStackTrace()
+        _snackbar.value = context.getString(R.string.error_unable_to_save_file)
       }
       allNotes.add(note)
       return true
@@ -66,15 +71,19 @@ class InternalFileRepository(private var context: Context) : NoteRepository {
 
   override fun getNote(fileName: String): Note {
     val note = Note(fileName, "", 0)
-    context.openFileInput(fileName).use { stream ->
-      val text = stream.bufferedReader().use {
-        it.readText()
+    try {
+      context.openFileInput(fileName).use { input ->
+        val text = String(input.readBytes(), Charsets.UTF_8)
+        note.dateModified = Date(noteFile(fileName).lastModified())
+        note.priority = text.takeLast(1).toInt()
+        note.noteText = text.dropLast(1)
+        return note
       }
-      note.dateModified = Date(noteFile(fileName).lastModified())
-      note.priority = text.takeLast(1).toInt()
-      note.noteText = text.dropLast(1)
+    } catch (e:Exception) {
+      e.printStackTrace()
+      _snackbar.value = context.getString(R.string.error_unable_to_decrypt)
+      return note
     }
-    return note
   }
 
   override fun deleteNote(fileName: String): Boolean {
@@ -124,34 +133,4 @@ class InternalFileRepository(private var context: Context) : NoteRepository {
       fileEncryptionScheme
     ).build()
   }
-
-  fun encryptEntry(fileName: String, body:String, existingName: String) {
-    if (fileName.isBlank()) return
-
-    try {
-      deleteNote(existingName)
-      val encryptedFile = getEncryptedEntry(fileName)
-      encryptedFile.openFileOutput().use { output ->
-        output.write(body.toByteArray())
-      }
-    } catch(e: Exception) {
-      e.printStackTrace()
-      _snackbar.value = context.getString(R.string.error_unable_to_save_file)
-    }
-  }
-
-  fun decryptEntry(fileName: String): String {
-    val encryptedFile = getEncryptedEntry(fileName)
-    try {
-      encryptedFile.openFileInput().use { input ->
-        return String(input.readBytes(), Charsets.UTF_8)
-      }
-    } catch(e: Exception) {
-      e.printStackTrace()
-      _snackbar.value = context.getString(R.string.error_unable_to_decrypt)
-      return ""
-    }
-  }
-
-
 }
