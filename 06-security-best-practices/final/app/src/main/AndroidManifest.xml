@@ -44,7 +44,7 @@
 
     <!-- Splash Activity -->
     <activity android:name="com.raywenderlich.android.organizedsimplenotes.SplashActivity"
-      android:exported="false">
+      >
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
