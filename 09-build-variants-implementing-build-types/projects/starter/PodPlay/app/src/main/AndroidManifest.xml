@@ -14,6 +14,7 @@
     <activity
       android:name=".ui.PodcastActivity"
       android:launchMode="singleTop"
+      android:exported="true"
       android:theme="@style/AppTheme.NoActionBar">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -27,13 +28,17 @@
         android:resource="@xml/searchable" />
     </activity>
 
-    <receiver android:name="androidx.media.session.MediaButtonReceiver">
+    <receiver android:name="androidx.media.session.MediaButtonReceiver"
+      android:exported="true"
+      >
       <intent-filter>
         <action android:name="android.intent.action.MEDIA_BUTTON" />
       </intent-filter>
     </receiver>
 
-    <service android:name=".service.PodplayMediaService">
+    <service android:name=".service.PodplayMediaService"
+      android:exported="true"
+      >
       <intent-filter>
         <action android:name="android.media.browse.MediaBrowserService" />
       </intent-filter>
