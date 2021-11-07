@@ -18,7 +18,9 @@
       android:theme="@style/AppTheme"
       android:usesCleartextTraffic="true">
 
-    <activity android:name=".ui.PodcastActivity"
+    <activity
+        android:exported="true"
+        android:name=".ui.PodcastActivity"
         android:launchMode="singleTop"
         android:theme="@style/AppTheme.NoActionBar">
 
@@ -41,6 +43,7 @@
     </service>
 
     <receiver
+        android:exported="false"
         android:name="androidx.media.session.MediaButtonReceiver" >
       <intent-filter>
         <action android:name="android.intent.action.MEDIA_BUTTON" />
