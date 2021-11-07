@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/encryption_key_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:hint="@string/dialog_new_encryption_key_current_encryption_key_hint"
+        app:endIconMode="password_toggle">
+
+      <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/encryption_key_input_edit_text"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:inputType="numberPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/new_encryption_key_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:hint="@string/dialog_new_encryption_key_new_encryption_key_hint"
+        app:endIconMode="password_toggle">
+
+      <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/new_encryption_key_input_edit_text"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:inputType="numberPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+  </LinearLayout>
+
+
+</FrameLayout>
