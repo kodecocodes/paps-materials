@@ -1,0 +1,124 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+  signingConfigs {
+    release {
+      storeFile file('/Users/evana/Desktop/podplay_release_key')
+      storePassword "password"
+      keyAlias "key"
+      keyPassword "password"
+    }
+  }
+  compileSdkVersion 31
+  buildToolsVersion = '30.0.3'
+  defaultConfig {
+    applicationId "com.raywenderlich.podplay.evana"
+    minSdkVersion 23
+    targetSdkVersion 31
+    versionCode 2
+    versionName "1.0"
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    buildConfigField "boolean", "IS_PRODUCTION", "false"
+    signingConfig signingConfigs.release
+  }
+
+  buildTypes {
+    debug {
+      minifyEnabled false
+      shrinkResources false
+    }
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+    }
+    qa {
+      initWith debug
+      applicationIdSuffix ".qaTesting"
+      signingConfig signingConfigs.debug
+    }
+  }
+  flavorDimensions "version_type", "store"
+  productFlavors {
+    free {
+      dimension "version_type"
+      versionNameSuffix "-free"
+    }
+    full {
+      dimension "version_type"
+      versionNameSuffix "-full"
+    }
+  }
+
+  productFlavors {
+    google {
+      dimension "store"
+      versionNameSuffix "-google"
+    }
+    amazon {
+      dimension "store"
+      versionNameSuffix "-amazon"
+      signingConfig signingConfigs.release
+    }
+  }
+
+  variantFilter { variant ->
+    def names = variant.flavors*.name
+    if (names.contains("free") && names.contains("amazon")) {
+      setIgnore(true)
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+  }
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_1_8.toString()
+  }
+  // dynamicFeatures = [':installTimeDeliveryExample', ':onDemandDeliveryExample', ':conditionalDeliveryExample', ':instantModuleExample']
+}
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+  implementation "androidx.appcompat:appcompat:$android_x_app_compat_version"
+  implementation "androidx.core:core-ktx:$android_kotlin_core_version"
+  implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+  implementation "com.google.android.material:material:$material_version"
+  implementation "androidx.recyclerview:recyclerview:$rv_version"
+  implementation "androidx.media:media:$media_version"
+
+  implementation "androidx.fragment:fragment-ktx:$android_fragment_version"
+  implementation "androidx.activity:activity-ktx:$android_x_activity_version"
+  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+  implementation "androidx.room:room-runtime:$room_version"
+  implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+  kapt "androidx.room:room-compiler:$room_version"
+
+  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+
+  implementation "com.github.bumptech.glide:glide:$glide_version"
+  implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+  implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+  implementation "androidx.work:work-runtime-ktx:$android_work_version"
+
+  testImplementation "junit:junit:$j_unit_version"
+  androidTestImplementation "androidx.test.ext:junit:$j_unit_android_extensions_version"
+  androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+
+  androidTestImplementation "tools.fastlane:screengrab:2.0.0"
+  androidTestImplementation 'com.jraska:falcon:2.2.0'
+
+  implementation "com.google.android.play:core:$google_play_core_version"
+  implementation "com.google.android.play:core-ktx:$google_play_core_ktx"
+}
