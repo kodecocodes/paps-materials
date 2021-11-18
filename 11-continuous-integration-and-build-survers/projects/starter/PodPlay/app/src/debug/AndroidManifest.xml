@@ -14,6 +14,7 @@
     android:usesCleartextTraffic="true">
     <activity
       android:name=".ui.PodcastActivity"
+      android:exported="true"
       android:launchMode="singleTop"
       android:theme="@style/AppTheme.NoActionBar">
       <intent-filter>
@@ -28,13 +29,17 @@
         android:resource="@xml/searchable" />
     </activity>
 
-    <receiver android:name="androidx.media.session.MediaButtonReceiver">
+    <receiver
+      android:name="androidx.media.session.MediaButtonReceiver"
+      android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MEDIA_BUTTON" />
       </intent-filter>
     </receiver>
 
-    <service android:name=".service.PodplayMediaService">
+    <service
+      android:name=".service.PodplayMediaService"
+      android:exported="true">
       <intent-filter>
         <action android:name="android.media.browse.MediaBrowserService" />
       </intent-filter>
@@ -45,8 +50,8 @@
   <uses-permission android:name="android.permission.INTERNET" />
 
   <!-- Allows unlocking your device and activating its screen so UI tests can succeed -->
-  <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
-  <uses-permission android:name="android.permission.WAKE_LOCK"/>
+  <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
 
   <!-- Allows for storing and retrieving screenshots -->
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
