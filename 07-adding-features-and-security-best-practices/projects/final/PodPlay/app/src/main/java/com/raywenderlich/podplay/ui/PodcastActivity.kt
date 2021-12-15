@@ -146,11 +146,17 @@ class PodcastActivity :
       settingsMenuItem = menu.findItem(R.id.install_time_delivery_button)
     }
 
+    val SETTINGS_CLASS_NAME = "com.example.installtimedeliveryexample.SettingsActivity"
+    val TAG_ACTIVITY = "PodcastActivity"
+
+    val settingsMenuItem = menu.findItem(R.id.install_time_delivery_button)
+
     try {
       Class.forName(SETTINGS_CLASS_NAME)
       isInstallTimeModuleAvailable = true
       settingsMenuItem.isVisible = true
     } catch (e: Exception) {
+      settingsMenuItem.isVisible = false
       isInstallTimeModuleAvailable = false
       Log.d(TAG_ACTIVITY, "Couldn't start SettingsActivity, the class doesn't exist")
     }
@@ -399,7 +405,5 @@ class PodcastActivity :
     private const val TAG_DETAILS_FRAGMENT = "DetailsFragment"
     private const val TAG_EPISODE_UPDATE_JOB = "com.raywenderlich.podplay.episodes"
     private const val TAG_PLAYER_FRAGMENT = "PlayerFragment"
-    private const val TAG_ACTIVITY = "PodcastActivity"
-    private const val SETTINGS_CLASS_NAME = "com.raywenderlich.installtimedeliveryexample.SettingsActivity"
   }
 }
