@@ -1,0 +1,27 @@
+<resources>
+  <string name="app_name">PodPlay</string>
+  <string name="search_hint">Enter podcast search</string>
+  <string name="search">Search</string>
+  <string name="download">Download</string>
+  <string name="notes">Notes</string>
+  <string name="ok_button">OK</string>
+  <string name="subscribe">Subscribe</string>
+  <string name="subscribed_podcasts">Subscribed</string>
+  <string name="unsubscribe">Unsubscribe</string>
+  <string name="episode_notification_title">New episodes</string>
+  <string name="episode_notification_text">%1$d new episode(s) for %2$s</string>
+  <string name="pause">Pause</string>
+  <string name="play">Play</string>
+  <string name="image_placeholder_content_description">image placeholder</string>
+  <string name="replay_10_content_description">replay 10</string>
+  <string name="forward_30_content_description">forward 30</string>
+  <string name="podcast_image_view_content_description">podcast image view</string>
+  <string name="text_1x">1x</string>
+  <string name="text_0_00">0:00</string>
+  <string name="player_speed">%1$sx</string>
+  <string name="title_installtimedeliveryexample">Install Time Delivery Example</string>
+  <string name="title_ondemanddeliveryexample">On Demand Delivery Example</string>
+  <string name="title_conditionaldeliveryexample">Conditional Delivery Example</string>
+  <string name="title_instantmoduleexample">Instant Module Example</string>
+  <string name="install_time_delivery">Install Time Delivery</string>
+</resources>

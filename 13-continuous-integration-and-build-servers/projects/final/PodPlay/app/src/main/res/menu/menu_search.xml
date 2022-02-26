@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:context="com.raywenderlich.podplay.ui.PodcastActivity">
+
+  <item android:id="@+id/search_item"
+    android:title="@string/search"
+    android:icon="@android:drawable/ic_menu_search"
+    app:showAsAction="collapseActionView|ifRoom"
+    app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+
+  <item
+    android:id="@+id/install_time_delivery_button"
+    android:title="@string/install_time_delivery"
+    android:icon="@android:drawable/ic_menu_preferences"
+    android:visible="false"
+    app:showAsAction="ifRoom"/>
+
+  <item android:id="@+id/download_on_demand_module_item"
+    android:title="@string/download"
+    android:icon="@android:drawable/stat_sys_download"
+    android:visible="false"
+    app:showAsAction="ifRoom"/>
+
+  <item android:id="@+id/write_notes_item"
+    android:title="@string/notes"
+    android:icon="@android:drawable/ic_menu_edit"
+    android:visible="false"
+    app:showAsAction="ifRoom"/>
+</menu>

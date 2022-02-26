@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "pc-api-5589453121665775153-869",
+  "private_key_id": "af390779eea586cf35ddd0c8697dbc6c4c6e8f1a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDBu/cd/Q2F2giu\nQ1kBxsr/IMfz6ZxA/5+5+lwsMc0B5L1Ms0YUTLivSyUPqIRrwPhgMs/P5Kz96Mkm\nGxdt/L2uOB2MGqK/MxnUarTdLn1qDfHkDriVQk4XzRpkqtwe8yet6iBYi2+JnnLz\n4dXC5wUfyz2BQJidfXWneJy/lWFDQpd7t+/2QqsOylXsWN+XRXuDREj7Q1GQ7rj6\n6g2e3DaTMd6ptLWkk8AYvnOr2DPtD0o0tS0vXNFAOi+5JR5OLWvLE5Abd02oRBV1\nd6AqWVC49wAj9EibDodDEB4e0Y2JLOjtGZyiouAMy/cW2O3M93mpyw5+BkphFnbR\nk9FnaoOxAgMBAAECggEAAUb8DwXOgMR/pvx5L1aQReSBWlA+5ZEkjF1ESHiklXUH\nXXnXcLCnzWS6sBLS8AND7/MYenz+D1IpVK0RjLoBmyQyEld7nV9Ddep6hPR2mGF9\nUoeuplybTLNfZOyudQLH5HDlI92kJN1h/Hh6SGXDBiMOJavCGym1rJ683n4oN8Fg\nnnKYbLHAleZxOiGxfFePnpoUegz+6OIulnzNmWHemNzkptwU2+J5kmLkhIfdgAD3\nvkpuJw13qgDFkSriwXfRhNw2xSWk5ls/YCUI85+5tcBIzMSYhXQK6TsRYOX64f3B\n8LviAnDJGnW3NtZE3JjbFROjSrWauYI7bQI5XM5dsQKBgQDkl//hHqKB2u3DVCEf\n0FIIhs51Fk/cOfcqXuPXb4fF7DNBBW+ctG4nxjQsrqqPZZ2TGef7kLJMdbCJqUSD\nyNcbdV0SpJL0d5OA0AiYXfnpfXa1tZj5c4EhTzMA8OZWEyIJ0YpCqB2sGUFTJ40U\n0WdK7N6ytuPTQ9NL/8vFYzAMOQKBgQDY9g67+HPnpLZU7t2S05y5JdDGolzkv2+N\nByFEJXlI3jMXPwPxgkqNS7LFVLyomx0kBFUm3deRGkOYkdsFQOlONGVkN+Sqjo9D\nsEyotc2N9HTa9vwYLE284ovUkkeTT/EjpIb2QCjAEz9kKapUMuFk13RPuPoEsvAp\nDCaGWGwjOQKBgAd6cYSL3AUjhGO/fNXtmsFsp5RtBm/N9agNMqb5nxd6grK92sjl\nnjTu5wYPMMVALceCMXSpZyvZLc1THEqzZ1YeoMzbVXNp9glgxOc3K9XXpOqM5lRC\n0xaj4KdHOkHWnmZz1HIZzd6zdM+jm5nyv85TsXVnRkzDC0aRN7ldZVUBAoGANFvt\nYl+rWRPfDNA4mN6IzAXcRJOaZ3nrqdU2qgOBKZy2J74FbZtL8p16HzU78lS8y5xg\nEGkpRNNZzNAmUzY/F6h9b5otjRuqZ2N8nJqDaOa97Ln+TLcka5kgtcQ3kc2RHFDw\nYS1KqE/81GdZu8grrPJyF2tEqy2j18Qe5/0e28ECgYEA3f+74Grs0eXmBWlAp+cR\nV0VDupLefeaG2ppgpt9fJ420mvdOoiAh1u7qUw4ieC1zduuWnX8MNQ3z2hZM4H7B\n9oVKOtC16f96cx6N4h8b7WAJVB7x/pVhHuIxXseEu8YtXrc+yAOMPIerDaZZyb+P\naVfpeRGGvGXL5CRGC9xea/I=\n-----END PRIVATE KEY-----\n",
+  "client_email": "fastlane-podplay@pc-api-5589453121665775153-869.iam.gserviceaccount.com",
+  "client_id": "103078717454453398377",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/fastlane-podplay%40pc-api-5589453121665775153-869.iam.gserviceaccount.com"
+}

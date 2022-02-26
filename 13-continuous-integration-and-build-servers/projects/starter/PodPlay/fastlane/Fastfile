@@ -1,0 +1,46 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Screen Grab tests"
+  lane :screenshot_main_screen do
+    gradle(task: "clean assembleDebug assembleAndroidTest")
+    screengrab
+  end
+
+  desc "Submit a new Beta Build to Firebase App Distribution"
+  lane :beta do
+    gradle(task: "clean assembleFreeGoogleDebug")
+
+    firebase_app_distribution(
+        app: "1:167913591674:android:6b252800fedbd5f7cbfcc3",
+        groups: "podplay-beta-testers",
+        release_notes: "First Podplay Beta!"
+    )
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    gradle(task: "clean assembleFreeGoogleRelease")
+    upload_to_play_store(release_status: 'draft')
+  end
+end

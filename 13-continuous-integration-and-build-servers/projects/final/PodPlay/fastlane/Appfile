@@ -1,0 +1,2 @@
+json_key_file("./podplay-playstore-key.json")
+package_name("com.raywenderlich.podplay.evana")
