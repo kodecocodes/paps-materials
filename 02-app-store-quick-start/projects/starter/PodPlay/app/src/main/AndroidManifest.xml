@@ -32,7 +32,7 @@
     </activity>
 
     <service android:name=".service.PodplayMediaService"
-        android:exported="true">
+        android:exported="false">
       <intent-filter>
         <action android:name="android.media.browse.MediaBrowserService" />
       </intent-filter>
@@ -40,7 +40,7 @@
 
     <receiver
         android:name="androidx.media.session.MediaButtonReceiver"
-        android:exported="true">
+        android:exported="false">
       <intent-filter>
         <action android:name="android.intent.action.MEDIA_BUTTON" />
       </intent-filter>
