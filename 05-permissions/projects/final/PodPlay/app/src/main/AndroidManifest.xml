@@ -20,7 +20,8 @@
 
     <activity android:name=".ui.PodcastActivity"
         android:launchMode="singleTop"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        android:exported="true">
 
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
@@ -41,7 +42,8 @@
     </service>
 
     <receiver
-        android:name="androidx.media.session.MediaButtonReceiver" >
+        android:name="androidx.media.session.MediaButtonReceiver"
+        android:exported="false">
       <intent-filter>
         <action android:name="android.intent.action.MEDIA_BUTTON" />
       </intent-filter>
