@@ -40,15 +40,15 @@ android {
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-  implementation "androidx.appcompat:appcompat:$android_x_app_compat_version"
-  implementation "androidx.core:core-ktx:$android_kotlin_core_version"
+  implementation "androidx.appcompat:appcompat:$app_compat_version"
+  implementation "androidx.core:core-ktx:$core_ktx_version"
   implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
   implementation "com.google.android.material:material:$material_version"
-  implementation "androidx.recyclerview:recyclerview:$rv_version"
+  implementation "androidx.recyclerview:recyclerview:$recycler_view_version"
   implementation "androidx.media:media:$media_version"
 
-  implementation "androidx.fragment:fragment-ktx:$android_fragment_version"
-  implementation "androidx.activity:activity-ktx:$android_x_app_compat_version"
+  implementation "androidx.fragment:fragment-ktx:$fragment_version"
+  implementation "androidx.activity:activity-ktx:$app_compat_version"
   implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
   implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
@@ -66,10 +66,10 @@ dependencies {
   implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
   implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
-  implementation "androidx.work:work-runtime-ktx:$android_work_version"
+  implementation "androidx.work:work-runtime-ktx:$work_version"
 
-  testImplementation "junit:junit:$j_unit_version"
-  androidTestImplementation "androidx.test.ext:junit:$j_unit_android_extensions_version"
+  testImplementation "junit:junit:$junit_version"
+  androidTestImplementation "androidx.test.ext:junit:$junit_android_version"
   androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
 
   implementation "com.google.android.play:core:$google_play_core_version"
